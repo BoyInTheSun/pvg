@@ -12,17 +12,15 @@ Pedal Visualization of Gamepad.
 
 由于技术路线所限，**不支持**读取键盘和鼠标操作，同时**目前不支持**非串流软件场景使用。
 
+下文中的~~删除线标记~~代表将在未来支持。
+
 ## 使用
 
 使用[演示网址](https://pvg.boyinthesun.cn/)或将本项目克隆到本地。
 
-### 高版
+布局分为~~高版 `pvg-high.html`~~ 和矮版 `pvg-low.html`。
 
-[https://pvg.boyinthesun.cn/pvg-high/](https://pvg.boyinthesun.cn/pvg-high/)
-
-### 矮版
-
-[https://pvg.boyinthesun.cn/pvg-low/](https://pvg.boyinthesun.cn/pvg-low/)
+关于如何在 OBS 中使用可参见
 
 ## 参数说明
 
@@ -51,17 +49,18 @@ Pedal Visualization of Gamepad.
 |display_hinge|显示换挡和铰链（旋转轮胎系列专用）|`0` 不显示，`1` 按下|`0`|包含换挡和铰链两个|
 |~~display_couter~~|显示计数|`0` 不显示，`1` 显示|`0`||
 
-在代码逻辑中，非 `0` 即视为 `1`。~~删除线标记~~代表将在未来支持。
+在代码逻辑中，非 `0` 即视为 `1`。
 
-#### 档位布局 display_shifter
+#### ~~档位布局 display_shifter~~
 
+０、１、２、３、４、５、６、７、８、９
 |参数值|说明|00|01|10|11|
 |:-:|:-:|:-|:-|:-|:-|
-|5|五速|<p style="font-family:monospace;">1&nbsp;&nbsp;3&nbsp;&nbsp;5<br>╠══╬══╣<br>2&nbsp;&nbsp;4&nbsp;&nbsp;R</p>||||
-|6|六速|<p style="font-family:monospace;">1&nbsp;&nbsp;3&nbsp;&nbsp;5<br>╠══╬══╬══╗<br>2&nbsp;&nbsp;4&nbsp;&nbsp;6&nbsp;&nbsp;R</p>||||
-|7|七速|<p style="font-family:monospace;">1&nbsp;&nbsp;3&nbsp;&nbsp;5&nbsp;&nbsp;7<br>╠══╬══╬══╣<br>2&nbsp;&nbsp;4&nbsp;&nbsp;6&nbsp;&nbsp;R</p>||||
-|12+2|十二速+二倒挡|<p style="font-family:monospace;">1&nbsp;&nbsp;5&nbsp;&nbsp;9<br>╠══╬══╬══╗<br>3&nbsp;&nbsp;7&nbsp;&nbsp;11 R1</p>|<p style="font-family:monospace;">2&nbsp;&nbsp;6&nbsp;&nbsp;10<br>╠══╬══╬══╗<br>4&nbsp;&nbsp;8&nbsp;&nbsp;12 R2</p>|||
-|12+4|十二速+四倒挡|<p style="font-family:monospace;">1&nbsp;&nbsp;5&nbsp;&nbsp;9&nbsp;&nbsp;R3<br>╠══╬══╬══╣<br>3&nbsp;&nbsp;7&nbsp;&nbsp;11 R1</p>|<p style="font-family:monospace;">2&nbsp;&nbsp;6&nbsp;&nbsp;10 R4<br>╠══╬══╬══╣<br>4&nbsp;&nbsp;8&nbsp;&nbsp;12 R2</p>||||
+|5|五速|１　　３　　５<br>╠══╬══╣<br>２　　４　　Ｒ</p>||||
+|6|六速|1　　3　　5<br>╠══╬══╬══╗<br>2　　4　　6　　R</p>||||
+|7|七速|1　　3　　5　　7<br>╠══╬══╬══╣<br>2　　4　　6　　R</p>||||
+|12+2|十二速+二倒挡|1　　5　　9<br>╠══╬══╬══╗<br>3　　7　　11 R1</p>|2　　6　　10<br>╠══╬══╬══╗<br>4　　8　　12 R2</p>|||
+|12+4|十二速+四倒挡|1　　5　　9　　R3<br>╠══╬══╬══╣<br>3　　7　　11 R1</p>|2　　6　　10 R4<br>╠══╬══╬══╣<br>4　　8　　12 R2</p>||||
 
 此为显示的档位布局，和实际控制器种类和设置无关。
 
@@ -78,7 +77,7 @@ Pedal Visualization of Gamepad.
 |shiftup|加档|压变量|B键|p0||
 |shiftdown|减档|压变量|A键|p1||
 
-#### 档位开关行为 shifter_toggle
+#### ~~档位开关行为 shifter_toggle~~
 
 |参数值|说明|
 |-|-|
@@ -157,7 +156,7 @@ Pedal Visualization of Gamepad.
 
 ## 附录
 
-### xbox布局手柄的`navigator.getGamepads()`返回值
+### xbox布局手柄的 `navigator.getGamepads()` 返回值
 
 |变量|轴/按键|备注|
 |-|-|-|

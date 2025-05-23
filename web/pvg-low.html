@@ -18,6 +18,7 @@
 <style type="text/css">
     body {
         margin: 0;
+        position: relative;
     }
 
     .piclist {
@@ -84,15 +85,15 @@
     .piclist li.text_indicator p#diff_lock_text {
         font-size: 30px;
     }
-    
-    .piclist li.text_indicator p#track_lift_axle_text{
+
+    .piclist li.text_indicator p#track_lift_axle_text {
         font-size: 30px;
         line-height: 30px;
         height: 80px;
         padding-top: 20px;
     }
 
-    .piclist li.text_indicator p#trailer_lift_axle_text{
+    .piclist li.text_indicator p#trailer_lift_axle_text {
         font-size: 30px;
         line-height: 30px;
         height: 80px;
@@ -129,11 +130,36 @@
         margin: 0px;
         font-size: 25px;
     }
+
+    .hello {
+        display: flex;
+        background-color: #818181bd;
+        position: absolute;
+        z-index: 10;
+        height: 100%;
+        width: 100%;
+        color: #fff;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 50px;
+    }
+
+    .hello p {
+        margin: 10px;
+
+        text-shadow:
+            -2px -2px 0 #000,
+            2px -2px 0 #000,
+            -2px 2px 0 #000,
+            2px 2px 0 #000;
+    }
 </style>
 
 <body>
     <div class="hello">
-
+        <p>窗口分辨率 <span id="windowsHeight">???</span> px * <span id="windowsWidth">???</span> px</p>
+        <p>请连接控制器并按任意键</p>
     </div>
     <div class="piclist" id="piclist" style="display: none;">
         <li class="steering" id="text_steering" style="display: none;">
@@ -240,7 +266,7 @@
             return args;
         }
         function getDefaultArg(argName) {
-            switch (argName){
+            switch (argName) {
                 case 'steering': return 'a0';
                 case 'clutch': return 'v4';
                 case 'accelerator': return 'v7';
@@ -258,7 +284,7 @@
             */
             var argValue = args[argName];
             if (!argValue) argValue = getDefaultArg(argName);
-            if (!argValue) return function (gamepads) {0};
+            if (!argValue) return function (gamepads) { 0 };
             const reg = /^([0-3]?)([apv])([0-9]+)([apv]?[pm]?r?)(-?[01]\.[0-9]*)?$/;
             var result = argValue.match(reg);
             if (!result) {
@@ -269,7 +295,7 @@
             var gamepadIndex = result[1] ? parseInt(result[1]) : 0;
             var variableIndex = parseInt(result[3]);
 
-            console.log(gamepadIndex, variableIndex,argName,argValue)
+            console.log(gamepadIndex, variableIndex, argName, argValue)
             var splitValue = null;
             if (result[5]) {
                 splitValue = parseFloat(result[5]);
@@ -277,79 +303,79 @@
             if (result[2] == 'a') {
                 if (splitValue === null) splitValue = 0;
                 switch (result[4]) {
-                case '': 
-                    if (target == 'p') return function (gamepads) {return gamepads[gamepadIndex].axes[variableIndex] >= 0;};
-                    else if (target == 'v') return function (gamepads) {return -gamepads[gamepadIndex].axes[variableIndex] / 2 + 0.5;};
-                    else return function (gamepads) {console.log(gamepadIndex, variableIndex, gamepads);return gamepads[gamepadIndex].axes[variableIndex];};
-                case 'r':
-                    return function (gamepads) {return -gamepads[gamepadIndex].axes[variableIndex];};
-                case 'v':
-                    return function (gamepads) {return gamepads[gamepadIndex].axes[variableIndex] / 2 + 0.5;};
-                case 'vr':
-                    return function (gamepads) {return -gamepads[gamepadIndex].axes[variableIndex] / 2 + 0.5;};
-                case 'vp':
-                    return function (gamepads) {return gamepads[gamepadIndex].axes[variableIndex] > 0 ? gamepads[gamepadIndex].axes[variableIndex] : 0;};
-                case 'vpr':
-                    return function (gamepads) {return gamepads[gamepadIndex].axes[variableIndex] > 0 ? 1 - gamepads[gamepadIndex].axes[variableIndex] : 1;};
-                case 'vm':
-                    return function (gamepads) {return gamepads[gamepadIndex].axes[variableIndex] < 0 ? -gamepads[gamepadIndex].axes[variableIndex] : 0;};
-                case 'vmr':
-                    return function (gamepads) {return gamepads[gamepadIndex].axes[variableIndex] > 0 ? 1 - gamepads[gamepadIndex].axes[variableIndex] : 1;};
-                case 'p': 
-                    return function (gamepads) {return gamepads[gamepadIndex].axes[variableIndex] >= splitValue;};
-                case 'pr': 
-                    return function (gamepads) {return gamepads[gamepadIndex].axes[variableIndex] < splitValue;};
-                default: 
-                    console.log('[Error] ' + argName + ' 不支持的附加选项。');
-                    return function (gamepads) {
-                        return gamepads[gamepadIndex].axes[variableIndex];
-                    };
+                    case '':
+                        if (target == 'p') return function (gamepads) { return gamepads[gamepadIndex].axes[variableIndex] >= 0; };
+                        else if (target == 'v') return function (gamepads) { return -gamepads[gamepadIndex].axes[variableIndex] / 2 + 0.5; };
+                        else return function (gamepads) { console.log(gamepadIndex, variableIndex, gamepads); return gamepads[gamepadIndex].axes[variableIndex]; };
+                    case 'r':
+                        return function (gamepads) { return -gamepads[gamepadIndex].axes[variableIndex]; };
+                    case 'v':
+                        return function (gamepads) { return gamepads[gamepadIndex].axes[variableIndex] / 2 + 0.5; };
+                    case 'vr':
+                        return function (gamepads) { return -gamepads[gamepadIndex].axes[variableIndex] / 2 + 0.5; };
+                    case 'vp':
+                        return function (gamepads) { return gamepads[gamepadIndex].axes[variableIndex] > 0 ? gamepads[gamepadIndex].axes[variableIndex] : 0; };
+                    case 'vpr':
+                        return function (gamepads) { return gamepads[gamepadIndex].axes[variableIndex] > 0 ? 1 - gamepads[gamepadIndex].axes[variableIndex] : 1; };
+                    case 'vm':
+                        return function (gamepads) { return gamepads[gamepadIndex].axes[variableIndex] < 0 ? -gamepads[gamepadIndex].axes[variableIndex] : 0; };
+                    case 'vmr':
+                        return function (gamepads) { return gamepads[gamepadIndex].axes[variableIndex] > 0 ? 1 - gamepads[gamepadIndex].axes[variableIndex] : 1; };
+                    case 'p':
+                        return function (gamepads) { return gamepads[gamepadIndex].axes[variableIndex] >= splitValue; };
+                    case 'pr':
+                        return function (gamepads) { return gamepads[gamepadIndex].axes[variableIndex] < splitValue; };
+                    default:
+                        console.log('[Error] ' + argName + ' 不支持的附加选项。');
+                        return function (gamepads) {
+                            return gamepads[gamepadIndex].axes[variableIndex];
+                        };
                 }
             }
             else if (result[2] == 'p') {
                 switch (result[4]) {
-                case '': 
-                    if (target == 'a') return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].pressed ? 1 : -1;};
-                    else if (target == 'v') return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].pressed ? 1 : 0;};
-                    else return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].pressed;};
-                case 'r': 
-                    return function (gamepads) {return !gamepads[gamepadIndex].buttons[variableIndex].pressed;};
-                case 'a': 
-                    return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].pressed ? 1 : -1;};
-                case 'ar': 
-                    return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].pressed ? -1 : 1;};
-                case 'v': 
-                    return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].pressed ? 1 : 0;};
-                case 'vr': 
-                    return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].pressed ? 0 : 1;};
-                default:
-                    console.log('[Error] ' + argName + ' 不支持的附加选项。');
-                    return function (gamepads) {
-                        return gamepads[gamepadIndex].buttons[variableIndex].pressed;
-                    };
+                    case '':
+                        if (target == 'a') return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].pressed ? 1 : -1; };
+                        else if (target == 'v') return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].pressed ? 1 : 0; };
+                        else return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].pressed; };
+                    case 'r':
+                        return function (gamepads) { return !gamepads[gamepadIndex].buttons[variableIndex].pressed; };
+                    case 'a':
+                        return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].pressed ? 1 : -1; };
+                    case 'ar':
+                        return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].pressed ? -1 : 1; };
+                    case 'v':
+                        return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].pressed ? 1 : 0; };
+                    case 'vr':
+                        return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].pressed ? 0 : 1; };
+                    default:
+                        console.log('[Error] ' + argName + ' 不支持的附加选项。');
+                        return function (gamepads) {
+                            return gamepads[gamepadIndex].buttons[variableIndex].pressed;
+                        };
                 }
             }
             else if (result[2] == 'v') {
                 if (splitValue === null) splitValue = 0.5;
                 switch (result[4]) {
-                case '': 
-                    if (target == 'p') return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].value >= 0.5;};
-                    else return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].value;};
-                case 'r': 
-                    return function (gamepads) {return -gamepads[gamepadIndex].buttons[variableIndex].value;};
-                case 'a': 
-                    return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].value * 2 - 1;};
-                case 'ar': 
-                    return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].value * -2 + 1;};
-                case 'p': 
-                    return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].value >= splitValue;};
-                case 'pr': 
-                    return function (gamepads) {return gamepads[gamepadIndex].buttons[variableIndex].value < splitValue;};
-                default:
-                    console.log('[Error] ' + argName + ' 不支持的附加选项。');
-                    return function (gamepads) {
-                        return gamepads[gamepadIndex].buttons[variableIndex].value;
-                    };
+                    case '':
+                        if (target == 'p') return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].value >= 0.5; };
+                        else return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].value; };
+                    case 'r':
+                        return function (gamepads) { return -gamepads[gamepadIndex].buttons[variableIndex].value; };
+                    case 'a':
+                        return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].value * 2 - 1; };
+                    case 'ar':
+                        return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].value * -2 + 1; };
+                    case 'p':
+                        return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].value >= splitValue; };
+                    case 'pr':
+                        return function (gamepads) { return gamepads[gamepadIndex].buttons[variableIndex].value < splitValue; };
+                    default:
+                        console.log('[Error] ' + argName + ' 不支持的附加选项。');
+                        return function (gamepads) {
+                            return gamepads[gamepadIndex].buttons[variableIndex].value;
+                        };
                 }
             }
         }
@@ -375,6 +401,7 @@
                 var gamepads = navigator.getGamepads();
                 if (gamepads[0] == null) return;
 
+                document.getElementById('hello').style.display = 'none';
                 var steeringValue = getSteering(gamepads);
                 var clutchValue = getClutch(gamepads);
                 var breakValue = getBreak(gamepads);
@@ -444,7 +471,7 @@
             }, 1000 / fps);
 
         };
-        
+
         args = getArgs(document.url);
 
         getSteering = getFuncByArg('steering', 'a');
@@ -458,34 +485,34 @@
         if (args.style == '0') {
             //TODO
             windowsHeight = 500;
-            windowswidth = 0;
+            windowsWidth = 0;
         }
         else {
             windowsHeight = 300;
-            windowswidth = 0;
+            windowsWidth = 0;
             document.getElementById('piclist').style = '';
             if (args.display_steering != '0') {
-                windowswidth += 480;
+                windowsWidth += 480;
                 document.getElementById('text_steering').style = '';
                 document.getElementById('pedal_steering').style = '';
             }
             if (args.display_clutch != undefined && args.display_clutch != '0') {
-                windowswidth += 480;
+                windowsWidth += 480;
                 document.getElementById('text_clutch').style = '';
                 document.getElementById('pedal_clutch').style = '';
             }
             if (args.display_break != '0') {
-                windowswidth += 480;
+                windowsWidth += 480;
                 document.getElementById('text_break').style = '';
                 document.getElementById('pedal_break').style = '';
             }
             if (args.display_accelerator != '0') {
-                windowswidth += 480;
+                windowsWidth += 480;
                 document.getElementById('text_accelerator').style = '';
                 document.getElementById('pedal_accelerator').style = '';
             }
             if (args.indicator != '0') {
-                windowswidth += 200;
+                windowsWidth += 200;
                 document.getElementById('text_indicator').style = '';
                 document.getElementById('indicator').style = '';
                 if (args.display_packing != '0') {
@@ -518,21 +545,24 @@
                 }
             }
             if (args.display_couter != undefined && args.display_couter != '0') {
-                windowswidth += 220;
+                windowsWidth += 220;
                 document.getElementById('couter').style = '';
             }
         }
 
         document.body.style.height = windowsHeight + 'px';
-        document.body.style.width = windowswidth + 'px';
-        
-        if (args.max_angle != undefined){
+        document.body.style.width = windowsWidth + 'px';
+
+        document.getElementById('windowsHeight').innerText = windowsHeight;
+        document.getElementById('windowsWidth').innerText = windowsWidth;
+
+        if (args.max_angle != undefined) {
             maxAngle = parseFloat(args.max_angle);
         }
         else {
             maxAngle = 90;
         }
-        if (args.fps != undefined){
+        if (args.fps != undefined) {
             fps = parseFloat(args.fps);
         }
         else {
