@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imgs/favicon.png" type="image/x-icon">
+    <title>PVG - 踏板可视化</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            margin: 0;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        div.container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+
+        .page-updown {
+            position: absolute;
+            margin: 0 auto;
+            width: 100%;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page-updown:hover {
+            cursor: pointer;
+        }
+
+        .page-updown img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .page-down {
+            bottom: 20px;
+        }
+
+        .page-down img {
+            animation: page-down 0.8s alternate infinite;
+        }
+
+        .page-up {
+            top: 20px;
+        }
+
+        .page-up img {
+            transform: rotate(180deg);
+            animation: page-up 0.8s alternate infinite;
+        }
+
+        @keyframes page-down {
+            from {
+                opacity: 1;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes page-up {
+            from {
+                opacity: 1;
+                transform: translateY(-5px) rotate(180deg);
+            }
+
+            to {
+                opacity: 0.7;
+                transform: rotate(180deg);
+            }
+        }
+
+        section {
+            position: relative;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        section#home {
+            background-color: #f9f0cf;
+        }
+
+        section#document {
+            background-color: #f9e3cf;
+        }
+
+        h1 {
+            color: #5d0f10;
+            font-size: 40px;
+            margin: 10px;
+        }
+
+        h1 span.big {
+            font-size: 55px
+        }
+
+        h3 {
+            color: #5d0f10;
+            font-size: 25px;
+            margin: 10px;
+        }
+
+        h2 {
+            color: #5d0f10;
+            font-size: 35px;
+            margin: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            user-select: none;
+        }
+
+        .pedal {
+            position: relative;
+            height: 200px;
+            width: 200px;
+            transition: transform 0.3s;
+        }
+
+        .pedal img {
+            position: relative;
+            height: 200px;
+            width: 200px;
+            top: 0px;
+            z-index: 1;
+        }
+
+        .pedal p {
+            position: absolute;
+            user-select: none;
+            color: #ae3b05;
+            text-align: center;
+            z-index: 2;
+            text-shadow:
+                -1px -1px 0 #feb414,
+                1px -1px 0 #feb414,
+                -1px 1px 0 #feb414,
+                1px 1px 0 #feb414;
+        }
+
+        .pedal0 p {
+            font-size: 30px;
+            top: 75px;
+            width: 200px;
+        }
+
+        .pedal1 p {
+            font-size: 38px;
+            top: 0px;
+            left: 35px;
+            height: 200px;
+            letter-spacing: 2px;
+            writing-mode: vertical-lr;
+        }
+
+        .pedal0 {
+            transform-origin: 50% -25%;
+        }
+
+        .pedal0:hover {
+            transform: rotateX(30deg) scaleX(0.9);
+            cursor: pointer;
+        }
+
+        .pedal0:active {
+            transform: rotateX(40deg) scaleX(0.86);
+        }
+
+        .pedal1 {
+            transform-origin: bottom;
+        }
+
+        .pedal1:hover {
+            transform: rotateX(35deg);
+            cursor: pointer;
+        }
+
+        .pedal1:active {
+            transform: rotateX(45deg);
+        }
+
+        section#demo {
+            background-color: #f2ca9c;
+        }
+
+        .demo-bar {
+            font-size: 22px;
+            height: 26px;
+            line-height: 26px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .select {
+            background-color: #f4dfc6;
+            margin: 0 2px;
+            border-radius: 3px;
+            display: flex;
+            line-height: 26px;
+            font-size: 18px;
+            border: #000000 1px solid;
+        }
+
+        .select:hover {
+            cursor: pointer;
+            outline: -webkit-focus-ring-color auto 1px;
+        }
+
+        option:nth-child(even) {
+            background-color: #e0ceba;
+        }
+
+        option:nth-child(odd) {
+            background-color: #f7e8d8;
+        }
+
+        option:checked {
+            background-color: #ec8c24 !important;
+        }
+
+        #select-type {
+            width: 60px;
+        }
+
+        #select-device {
+            width: 100px;
+        }
+
+        #select-conf {
+            width: 240px;
+        }
+
+        .select-active {
+            width: 100%;
+            text-align: center;
+        }
+
+        .demo-bar input {
+            box-sizing: border-box;
+            vertical-align: top;
+            height: 26px;
+            line-height: 26px;
+            font-size: 18px;
+            border: 1px #000000 solid;
+            background-color: #f4dfc6;
+            outline: none;
+            padding: 0;
+            padding-left: 10px;
+            margin: 0;
+            margin-left: 5px;
+            color: #000000;
+            padding-block: 0px;
+            padding-inline: 0px;
+            border-radius: 3px;
+            width: calc(100% - 700px);
+        }
+
+        .demo-bar input:focus-visible {
+            outline: #000000 auto 1px;
+        }
+
+        .demo-bar input:hover {
+            outline: #816300 auto 1px;
+        }
+
+        .demo-bar .btn {
+            user-select: none;
+            border-radius: 3px;
+            width: 26px;
+            height: 26px;
+            margin: 0 2px;
+        }
+
+        .demo-bar .btn img {
+            margin: 3px 3px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .demo-bar #btn-copy {
+            background-color: #bfde91;
+        }
+
+        .demo-bar #btn-open {
+            background-color: #b6d9ff;
+        }
+
+        .demo-bar .btn:hover {
+            cursor: pointer;
+        }
+
+        .demo-bar .btn:active {
+            cursor: copy;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <section class="page" id="home">
+            <h1><span class="big">P</span>edal <span class="big">V</span>isualization of <span
+                    class="big">G</span>amepad</h1>
+            <h1>游戏控制器踏板可视化</h1>
+            <h3>基于H5的赛车游戏直播插件，实时读取手柄等控制器的状态，方便观众了解主播操作。</h3>
+            <div class="button-group">
+                <div class="pedal pedal0" id="clutch" onclick="window.open('https://github.com/BoyInTheSun/pvg')">
+                    <img src="imgs/pedal0.png">
+                    <p>项目地址</p>
+                </div>
+                <div class="pedal pedal0" id="clutch" onclick="scrollToElement('document')">
+                    <img src="imgs/pedal0.png">
+                    <p>说明文档</p>
+                </div>
+                <div class="pedal pedal1" id="clutch" onclick="scrollToElement('demo')">
+                    <img src="imgs/pedal1.png">
+                    <p>快速开始</p>
+                </div>
+            </div>
+            <div class="page-down page-updown" onclick="scrollToElement('demo')">
+                <img src="imgs/down.svg">
+            </div>
+        </section>
+
+        <section class="page content-page" id="demo">
+            <h2>快速开始</h2>
+            <h3>可自定义按键和显示内容，参数说明和更多细节请见<a href="https://github.com/BoyInTheSun/pvg">项目地址</a></h3>
+            <div class="demo-bar">
+                <select class="select" id="select-type">
+                    <option value="矮版">矮版</option>
+                </select>
+                <select class="select" id="select-device">
+                </select>
+                <select class="select" id="select-conf">
+                </select>
+
+                <div class="btn" id="btn-copy" onclick="navigator.clipboard.writeText(getDemoUrl());">
+                    <img src="imgs/copy.svg">
+                </div>
+                <div class="btn" id="btn-open" onclick="window.open(getDemoUrl());">
+                    <img src="imgs/open.svg">
+                </div>
+                <input id="demo-url" type="url" value="pvg-low.html">
+            </div>
+            <h3 id="no-iframe" style="display: none;">本地文件模式不支持预览</h3>
+
+            <iframe id="demo-iframe" src="pvg-low.html" height="300px" width="1640px"
+                style="transform: scale(0.5);"></iframe>
+            <div class="page-up page-updown" onclick="scrollToElement('home')">
+                <img src="imgs/down.svg">
+            </div>
+            <div class="page-down page-updown" onclick="scrollToElement('document')">
+                <img src="imgs/down.svg">
+            </div>
+        </section>
+
+        <section class="page content-page" id="document">
+            <h2>说明文档</h2>
+            <h3>项目仍在开发中，任何问题可邮件至<a
+                    href="mailto:a@boyinthesun.cn?subject=关于PVG的功能建议或bug反馈&body=我在发送此邮件前，已详细阅读了项目文档。">a@boyinthesun.cn</a>
+                或于<a href="">评论区</a>讨论
+            </h3>
+            <div class="page-up page-updown" onclick="scrollToElement('demo')">
+                <img src="imgs/down.svg">
+            </div>
+        </section>
+
+    </div>
+    <script>
+        function scrollToElement(ElementID) {
+            document.getElementById(ElementID).scrollIntoView({
+                behavior: "smooth",
+            });
+        };
+        const demo_urls = {
+            'low': {
+                'name': '矮版',
+                'children': {
+                    'xbox': {
+                        'name': '手柄',
+                        'children': {
+                            'default': { 'name': '默认', 'url': 'pvg-low.html' },
+                            'full': { 'name': '完整参数', 'url': 'pvg-low.html?opacity=1&fpd=60&display_steering=1&max_angle=90&display_clutch=0&display_accelerator=1&display_break=1&indicator=1&display_paking=1&display_shift=1&display_diff_lock=0&display_track_lift_axle=0&display_trailer_lift_axle=0&display_hinge=0&steering=a0&clutch=v4&accelerator=v7&break=v6&shiftup=p0&shiftdown=p1' },
+                            'auto_1': { 'name': '自动(A手刹)', 'url': 'pvg-low.html?indicator=0&paking=p1' },
+                            'auto_2': { 'name': '自动(RB手刹)', 'url': 'pvg-low.html?indicator=0&paking=p5' },
+                            'manual_1': { 'name': '手动(B升A降RB手刹)', 'url': 'pvg-low.html?shiftup=p0&shiftdown=p1&paking=p5' },
+                            'manual_2': { 'name': '手动(Y升B降A手刹)', 'url': 'pvg-low.html?shiftup=p2&shiftdown=p0&paking=p1' },
+                            'clutch_1': { 'name': '手离(LB离合B升A降RB手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shiftup=p0&shiftdown=p1&paking=p5' },
+                            'clutch_2': { 'name': '手离(LB离合Y升B降RB手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shiftup=p2&shiftdown=p0&paking=p5' },
+                            'clutch_3': { 'name': '手离(LB离合Y升B降A手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shiftup=p2&shiftdown=p0&paking=p1' },
+                            'clutch_4': { 'name': '手离(B离合Y升A降RB手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shiftup=p0&shiftdown=p1&paking=p5' },
+                            'spin_tires': { 'name': '旋转轮胎系列', 'url': 'pvg-low.html?display_shift=0&display_hinge=1' },
+                            'truck_auto': { 'name': '美卡&欧卡2自动', 'url': 'pvg-low.html?display_paking=2&display_shift=0&display_diff_lock=1&display_track_lift_axle=1' },
+                            'truck_manual': { 'name': '美卡&欧卡2手动(B升A降)', 'url': 'pvg-low.html?display_paking=2&display_shift=1' },
+                        }
+                    }
+                }
+            }
+        }
+
+        function transform_iframe() {
+            iframe = document.getElementById('demo-iframe');
+            iframe.height = iframe.contentWindow.document.body.clientHeight + 'px';
+            iframe.width = iframe.contentWindow.document.body.clientWidth + 'px';
+            iframe.style = 'transform-origin: top; transform: scale(' + (window.innerWidth - 300) / iframe.contentWindow.document.body.clientWidth + ');';
+        }
+
+        function getDemoUrl() {
+            return new URL(
+                document.getElementById('demo-url').value,
+                new URL(window.location.href)
+            ).href;
+        }
+        function updateIframe() {
+            iframe = document.getElementById('demo-iframe');
+            iframe.src = document.getElementById('demo-url').value;
+        }
+
+        if (window.location.protocol == 'file:') {
+            iframe = document.getElementById('demo-iframe');
+            iframe.style = 'display: none;';
+            noIframe = document.getElementById('no-iframe');
+            noIframe.style = '';
+        }
+        else {
+            document.getElementById('demo-iframe').addEventListener('load', transform_iframe)
+            window.onresize = transform_iframe;
+            document.getElementById('demo-url').addEventListener('input', updateIframe);
+        }
+        if (window.location.protocol == 'http:') {
+            document.styleSheets[0].addRule('#btn-copy:hover', 'cursor: not-allowed;');
+        }
+
+        selectType = document.getElementById('select-type');
+        selectDevice = document.getElementById('select-device');
+        selectConf = document.getElementById('select-conf');
+        optionsType = '';
+        for (type of Object.keys(demo_urls)) {
+            optionsType += '<option value="' + type + '">' + demo_urls[type].name + '</option>';
+        }
+        selectType.innerHTML = optionsType;
+        function updateDevice() {
+            optionsDevice = '';
+            devices = demo_urls[selectType.value].children;
+            for (device of Object.keys(devices)) {
+                optionsDevice += '<option value="' + device + '">' + devices[device].name + '</option>';
+            }
+            selectDevice.innerHTML = optionsDevice;
+        }
+        updateDevice();
+        selectType.addEventListener('change', updateDevice);
+        function updateConf() {
+            optionsConf = '';
+            confs = demo_urls[selectType.value].children[selectDevice.value].children;
+            for (conf of Object.keys(confs)) {
+                optionsConf += '<option value="' + conf + '">' + confs[conf].name + '</option>';
+            }
+            selectConf.innerHTML = optionsConf;
+        }
+        updateConf();
+        selectDevice.addEventListener('change', updateConf);
+        function updateUrl() {
+            url = demo_urls[selectType.value].children[selectDevice.value].children[selectConf.value].url;
+            document.getElementById('demo-url').value = url;
+            updateIframe();
+        }
+        selectConf.addEventListener('change', updateUrl);
+        updateUrl();
+
+
+
+
+    </script>
+</body>
+
+</html>
