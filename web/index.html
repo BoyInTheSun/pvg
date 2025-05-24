@@ -96,33 +96,47 @@
         }
 
         section#home {
-            background-color: #f9f0cf;
+            background-color: #f4f3f3;
         }
 
         section#document {
-            background-color: #f9e3cf;
+            background-color: #f4f3f3;
+        }
+        @font-face {
+            font-family: 'MyFont';
+            src: url('static/Copperplate_Gothic_Bold.ttf');
+            }
+        h6 {
+            color: #060317;
+            font-size: 15px;
+            font-family:'MyFont';
+            margin: 5px;
         }
 
         h1 {
-            color: #5d0f10;
-            font-size: 40px;
+            background: linear-gradient(to right, #f4f3f3 50%, #060317 50%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 50px;
             margin: 10px;
+            font-family:'MyFont';
         }
+        .gradient {
+            background: linear-gradient(to right, #060317 50%, #f4f3f3 50%);
+            color: transparent;
+        }     
 
-        h1 span.big {
-            font-size: 55px
-        }
-
-        h3 {
-            color: #5d0f10;
-            font-size: 25px;
-            margin: 10px;
-        }
 
         h2 {
-            color: #5d0f10;
+            color: #060317;
             font-size: 35px;
             margin: 20px;
+        }
+        h3 {
+            color: #060317;
+            font-size: 25px;
+            margin: 10px;
         }
 
         .button-group {
@@ -320,10 +334,12 @@
 <body>
     <div class="container">
         <section class="page" id="home">
-            <h1><span class="big">P</span>edal <span class="big">V</span>isualization of <span
-                    class="big">G</span>amepad</h1>
-            <h1>游戏控制器踏板可视化</h1>
-            <h3>基于H5的赛车游戏直播插件，实时读取手柄等控制器的状态，方便观众了解主播操作。</h3>
+            <h6>BoyInTheSun</h6>
+            <div class="gradient">
+                <h1>Pedal Visualization of Gamepad</h1>
+            </div>
+            <h2>——游戏控制器踏板可视化——</h2>
+            <h3>——基于H5的赛车游戏直播插件，实时读取手柄等控制器的状态，方便观众了解主播操作。——</h3>
             <div class="button-group">
                 <div class="pedal pedal0" id="clutch" onclick="window.open('https://github.com/BoyInTheSun/pvg')">
                     <img src="imgs/pedal0.png">
@@ -347,13 +363,9 @@
             <h2>快速开始</h2>
             <h3>可自定义按键和显示内容，参数说明和更多细节请见<a href="https://github.com/BoyInTheSun/pvg">项目地址</a></h3>
             <div class="demo-bar">
-                <select class="select" id="select-type">
-                    <option value="矮版">矮版</option>
-                </select>
-                <select class="select" id="select-device">
-                </select>
-                <select class="select" id="select-conf">
-                </select>
+                <select class="select" id="select-type"></select>
+                <select class="select" id="select-device"></select>
+                <select class="select" id="select-conf"></select>
 
                 <div class="btn" id="btn-copy" onclick="navigator.clipboard.writeText(getDemoUrl());">
                     <img src="imgs/copy.svg">
@@ -377,9 +389,11 @@
 
         <section class="page content-page" id="document">
             <h2>说明文档</h2>
-            <h3>项目仍在开发中，任何问题可邮件至<a
+            <h3>你可以跟着<a href="https://boyinthesun.cn/posts/a5fe58606b97.html" target="_blank">这篇文章</a>逐步操作</h3>
+            <h3>项目仍在开发中，敬请关注</h3>
+            <h3>任何问题可邮件至<a
                     href="mailto:a@boyinthesun.cn?subject=关于PVG的功能建议或bug反馈&body=我在发送此邮件前，已详细阅读了项目文档。">a@boyinthesun.cn</a>
-                或于<a href="">评论区</a>讨论
+                或于<a href="" target="_blank">评论区</a>讨论
             </h3>
             <div class="page-up page-updown" onclick="scrollToElement('demo')">
                 <img src="imgs/down.svg">
@@ -401,7 +415,7 @@
                         'name': '手柄',
                         'children': {
                             'default': { 'name': '默认', 'url': 'pvg-low.html' },
-                            'full': { 'name': '完整参数', 'url': 'pvg-low.html?opacity=1&fpd=60&display_steering=1&max_angle=90&display_clutch=0&display_accelerator=1&display_break=1&indicator=1&display_paking=1&display_shift=1&display_diff_lock=0&display_track_lift_axle=0&display_trailer_lift_axle=0&display_hinge=0&steering=a0&clutch=v4&accelerator=v7&break=v6&shiftup=p0&shiftdown=p1' },
+                            'full': { 'name': '完整参数', 'url': 'pvg-low.html?opacity=1&fps=60&display_steering=1&max_angle=90&display_clutch=0&display_accelerator=1&display_break=1&indicator=1&display_paking=1&display_shift=1&display_diff_lock=0&display_track_lift_axle=0&display_trailer_lift_axle=0&display_hinge=0&steering=a0&clutch=v4&accelerator=v7&break=v6&shiftup=p0&shiftdown=p1' },
                             'auto_1': { 'name': '自动(A手刹)', 'url': 'pvg-low.html?indicator=0&paking=p1' },
                             'auto_2': { 'name': '自动(RB手刹)', 'url': 'pvg-low.html?indicator=0&paking=p5' },
                             'manual_1': { 'name': '手动(B升A降RB手刹)', 'url': 'pvg-low.html?shiftup=p0&shiftdown=p1&paking=p5' },

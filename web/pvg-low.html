@@ -131,7 +131,7 @@
         font-size: 25px;
     }
 
-    .hello {
+    #hello {
         display: flex;
         background-color: #818181bd;
         position: absolute;
@@ -145,7 +145,7 @@
         font-size: 50px;
     }
 
-    .hello p {
+    #hello p {
         margin: 10px;
 
         text-shadow:
@@ -157,7 +157,7 @@
 </style>
 
 <body>
-    <div class="hello">
+    <div id="hello">
         <p>窗口分辨率 <span id="windowsHeight">???</span> px * <span id="windowsWidth">???</span> px</p>
         <p>请连接控制器并按任意键</p>
     </div>
@@ -295,7 +295,7 @@
             var gamepadIndex = result[1] ? parseInt(result[1]) : 0;
             var variableIndex = parseInt(result[3]);
 
-            console.log(gamepadIndex, variableIndex, argName, argValue)
+            //console.log(gamepadIndex, variableIndex, argName, argValue);
             var splitValue = null;
             if (result[5]) {
                 splitValue = parseFloat(result[5]);
@@ -306,7 +306,7 @@
                     case '':
                         if (target == 'p') return function (gamepads) { return gamepads[gamepadIndex].axes[variableIndex] >= 0; };
                         else if (target == 'v') return function (gamepads) { return -gamepads[gamepadIndex].axes[variableIndex] / 2 + 0.5; };
-                        else return function (gamepads) { console.log(gamepadIndex, variableIndex, gamepads); return gamepads[gamepadIndex].axes[variableIndex]; };
+                        else return function (gamepads) { return gamepads[gamepadIndex].axes[variableIndex]; };
                     case 'r':
                         return function (gamepads) { return -gamepads[gamepadIndex].axes[variableIndex]; };
                     case 'v':
