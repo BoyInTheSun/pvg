@@ -74,8 +74,13 @@ Pedal Visualization of Gamepad.
 |break|刹车轴|值变量|LT左扳机|v6||
 |paking|手刹|压变量|RB右肩键|p5||
 |~~shifter_toggle~~|档位开关行为|区分于 display_shifter，见[下表](#档位开关行为-shifter_toggle)||0|不适用序列式|
-|shiftup|加档|压变量|B键|p0||
-|shiftdown|减档|压变量|A键|p1||
+|shift_up|加档|压变量|B键|p1||
+|shift_down|减档|压变量|A键|p0||
+|diff_lock|差速器|压变量|A键 + B键|p0+p1||
+|track_lift_axle|卡车提升桥|压变量|X键 + Y键|p2+p3||
+|trailer_lift_axle|挂车提升桥|压变量|B键 + X键|p1+p2||
+|hinge|铰链|压变量|A键|p3||
+|shifter|换挡|压变量|LB左肩键|p4||
 
 #### ~~档位开关行为 shifter_toggle~~
 
@@ -97,6 +102,8 @@ Pedal Visualization of Gamepad.
 + `a/p/v` 代表轴（axes）、按钮按下（button.pressed）或按钮值（button.value）
 + `索引`代表该变量在接口中的索引。
 + `附加选项`可选，具体见表。
+
+特别地，`压变量`可以使用 `+` 连接，意为逻辑与。
 
 若提供的变量范围和要求的不一致，则会使用**加粗**选项进行强制转换。
 
@@ -164,10 +171,10 @@ Pedal Visualization of Gamepad.
 |axes[1]|LS左摇杆纵轴|上负下正|
 |axes[2]|RS右摇杆横轴|左负右正|
 |axes[3]|RS右摇杆横轴|上负下正|
-|button[0]|B键||
-|button[1]|A键||
-|button[2]|Y键||
-|button[3]|X键||
+|button[0]|A键||
+|button[1]|B键||
+|button[2]|X键||
+|button[3]|Y键||
 |button[4]|LB左肩键||
 |button[5]|RB右肩键||
 |button[6]|LT左扳机键|线性|

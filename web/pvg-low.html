@@ -54,59 +54,48 @@
 
     .piclist li.indicator {
         float: left;
-        width: 100px;
+        width: 200px;
         height: 300px;
+        margin-right: 20px;
         flex-direction: column;
     }
 
     .piclist li.indicator div {
         height: 100px;
+        display: flex;
     }
 
     .piclist li.indicator img {
-        position: fixed;
+        position: relative;
         width: 100px;
         height: 100px;
     }
 
-    .piclist li.text_indicator {
-        float: left;
-        width: 100px;
-        height: 300px;
-    }
-
-    .piclist li.text_indicator p {
+    .piclist li.indicator p {
         height: 100px;
-        margin: auto 0;
+        width: 100px;
         text-align: center;
         line-height: 100px;
     }
 
-    .piclist li.text_indicator p#diff_lock_text {
+    .piclist li.indicator p.c3 {
         font-size: 30px;
     }
 
-    .piclist li.text_indicator p#track_lift_axle_text {
-        font-size: 30px;
-        line-height: 30px;
-        height: 80px;
-        padding-top: 20px;
-    }
-
-    .piclist li.text_indicator p#trailer_lift_axle_text {
+    .piclist li.indicator p.c5 {
         font-size: 30px;
         line-height: 30px;
         height: 80px;
         padding-top: 20px;
     }
 
-    .piclist li.counter {
+    .piclist li#count {
         float: left;
         width: 220px;
         height: 300px;
     }
 
-    .piclist li.counter div {
+    .piclist li#count div {
         width: 220px;
         float: left;
     }
@@ -120,7 +109,7 @@
     }
 
     .piclist p {
-        margin: 3px;
+        margin: 0;
         text-align: center;
         color: white;
         font-size: 40px;
@@ -190,51 +179,49 @@
         <li class="pedal" id="pedal_accelerator" style="display: none;">
             <img src="imgs/pedal1.png" id="accelerator_img" />
         </li>
-        <li class="text_indicator" id="text_indicator" style="display: none;">
-            <p id="packing_text" style="display: none;">手刹</p>
-            <p id="shift_up_text" style="display: none;">升档</p>
-            <p id="shift_down_text" style="display: none;">降档</p>
-            <p id="diff_lock_text" style="display: none;">差速锁</p>
-            <p id="track_lift_axle_text" style="display: none;">卡车<br>提升桥</p>
-            <p id="trailer_lift_axle_text" style="display: none;">挂车<br>提升桥</p>
-            <p id="hinge_text" style="display: none;">铰链</p>
-            <p id="mini_shifter_text" style="display: none;">换挡</p>
-        </li>
         <li class="indicator" id="indicator" style="display: none;">
             <div id="packing" style="display: none;">
-                <img src="imgs/packing0.png" id="packing_0" />
-                <img src="imgs/packing1.png" id="packing_1" />
+                <p>手刹</p>
+                <img src="imgs/packing1.png" />
+                <img src="imgs/packing0.png" style="display: none;" />
             </div>
             <div id="shift_up" style="display: none;">
-                <img src="imgs/shift_up0.png" id="shift_up_0" />
-                <img src="imgs/shift_up1.png" id="shift_up_1" />
+                <p>升档</p>
+                <img src="imgs/shift_up1.png" />
+                <img src="imgs/shift_up0.png" style="display: none;" />
             </div>
             <div id="shift_down" style="display: none;">
-                <img src="imgs/shift_down0.png" id="shift_down_0" />
-                <img src="imgs/shift_down1.png" id="shift_down_1" />
+                <p>降档</p>
+                <img src="imgs/shift_down1.png" />
+                <img src="imgs/shift_down0.png" style="display: none;" />
             </div>
             <div id="diff_lock" style="display: none;">
-                <img src="imgs/diff_lock0.png" id="diff_lock_0" />
-                <img src="imgs/diff_lock1.png" id="diff_lock_1" />
+                <p class="c3">差速锁</p>
+                <img src="imgs/diff_lock1.png" />
+                <img src="imgs/diff_lock0.png" style="display: none;" />
             </div>
             <div id="track_lift_axle" style="display: none;">
-                <img src="imgs/track_lift_axle0.png" id="track_lift_axle_0" />
-                <img src="imgs/track_lift_axle1.png" id="track_lift_axle_1" />
+                <p class="c5">卡车<br>提升桥</p>
+                <img src="imgs/track_lift_axle1.png" />
+                <img src="imgs/track_lift_axle0.png" style="display: none;" />
             </div>
             <div id="trailer_lift_axle" style="display: none;">
-                <img src="imgs/trailer_lift_axle0.png" id="trailer_lift_axle_0" />
-                <img src="imgs/trailer_lift_axle1.png" id="trailer_lift_axle_1" />
+                <p class="c5">挂车<br>提升桥</p>
+                <img src="imgs/trailer_lift_axle1.png" />
+                <img src="imgs/trailer_lift_axle0.png" style="display: none;" />
             </div>
             <div id="hinge" style="display: none;">
-                <img src="imgs/hinge0.png" id="hinge_0" />
-                <img src="imgs/hinge1.png" id="hinge_1" />
+                <p>铰链</p>
+                <img src="imgs/hinge1.png" />
+                <img src="imgs/hinge0.png" style="display: none;" />
             </div>
-            <div id="mini_shifter" style="display: none;">
-                <img src="imgs/mini_shifter0.png" id="mini_shifter_0" />
-                <img src="imgs/mini_shifter1.png" id="mini_shifter_1" />
+            <div id="shifter" style="display: none;">
+                <p>换挡</p>
+                <img src="imgs/shifter1.png" />
+                <img src="imgs/shifter0.png" style="display: none;" />
             </div>
         </li>
-        <li class="counter" style="display: none;">
+        <li id="count" style="display: none;">
             <p>今日统计</p>
             <div>
                 <p class="small">转向</p>
@@ -272,30 +259,54 @@
                 case 'accelerator': return 'v7';
                 case 'break': return 'v6';
                 case 'paking': return 'p5';
-                case 'shiftup': return 'p0';
-                case 'shiftdown': return 'p1';
+                case 'shift_up': return 'p1';
+                case 'shift_down': return 'p0';
+                case 'diff_lock': return 'p0+p1';
+                case 'track_lift_axle': return 'p2+p3';
+                case 'trailer_lift_axle': return 'p1+p2';
+                case 'hinge': return 'p3';
+                case 'shifter': return 'p4';
                 default: return;
             }
         }
 
-        function getFuncByArg(argName, target) {
+        function getFuncByArgName(argName, target) {
+            var argExpFull = args[argName];
+            if (!argExpFull) argExpFull = getDefaultArg(argName);
+            if (!argExpFull) return function (gamepads) { 0 };
+            if (argExpFull.indexOf('+') != -1) {
+                argExps = argExpFull.split('+');
+                var funcs = new Array();
+                for (let argExp of argExps) {
+                    funcs.push(getFuncByArgExp(argExp, 'p'));
+                }
+                return function (gamepad) {
+                    var result = true;
+                    for (let func of funcs) {
+                        result &&= func(gamepad);
+                    }
+                    return result;
+                }
+            }
+            else {
+                return getFuncByArgExp(argExpFull, target);
+            }
+        }
+        function getFuncByArgExp(argExp, target) {
             /*
             target可选：p压变量、a轴变量和v值变量
             */
-            var argValue = args[argName];
-            if (!argValue) argValue = getDefaultArg(argName);
-            if (!argValue) return function (gamepads) { 0 };
             const reg = /^([0-3]?)([apv])([0-9]+)([apv]?[pm]?r?)(-?[01]\.[0-9]*)?$/;
-            var result = argValue.match(reg);
+            var result = argExp.match(reg);
+            //console.log('getFuncByArgExp', argExp, target, result);
+
             if (!result) {
-                console.log('[Error] ' + argName + ' 格式非法。');
-                argValue = getDefaultArg(argName);
-                result = argValue.match(reg);
+                console.log('[Error] ' + argExp + ' 格式非法。');
+                return function (gamepad) { return 0; };
             }
             var gamepadIndex = result[1] ? parseInt(result[1]) : 0;
             var variableIndex = parseInt(result[3]);
 
-            //console.log(gamepadIndex, variableIndex, argName, argValue);
             var splitValue = null;
             if (result[5]) {
                 splitValue = parseFloat(result[5]);
@@ -380,6 +391,38 @@
             }
         }
 
+        function getBoolFuncByArgName(argName, target, display) {
+            count[argName] = 0;
+            statu[argName] = false;
+            press[argName] = false;
+            var pressFunc = getFuncByArgName(argName, target);
+            if (display == '2') {
+                return function (gamepad) {
+                    var change = pressFunc(gamepad);
+                    if (!press[argName] && change) {
+                        statu[argName] = !statu[argName];
+                        press[argName] = true;
+                        if (statu[argName]) count[argName] += 1;
+                    }
+                    else if (press[argName] && !change) {
+                        press[argName] = false;
+                    }
+                    return statu[argName];
+                }
+            }
+            else {
+                return function (gamepad) {
+                    statu[argName] = pressFunc(gamepad);
+                    if (statu[argName] ^ press[argName]) {
+                        press[argName] = !press[argName];
+                        if (press[argName]) count[argName] += 1;
+                    }
+                    return statu[argName];
+                };
+            }
+        }
+
+
         function toPercentage(thisFloat) {
             var thisPercentage = 'xx.x%';
             if (thisFloat < 0) thisFloat = -thisFloat;
@@ -400,6 +443,8 @@
             this.controlTimer = setInterval(() => {
                 var gamepads = navigator.getGamepads();
                 if (gamepads[0] == null) return;
+
+                gamepads = [gamepads[1], null, null, null]; /* for test */
 
                 document.getElementById('hello').style.display = 'none';
                 var steeringValue = getSteering(gamepads);
@@ -429,6 +474,90 @@
                 document.getElementById('accelerator_value').style.color = acceleratorColor;
                 document.getElementById('accelerator_text').style.color = acceleratorColor;
 
+                // 更新指示器
+                if (getPacking(gamepads)) {
+                    document.getElementById('packing').children[0].style.color = 'red';
+                    document.getElementById('packing').children[2].style.display = 'none';
+                    document.getElementById('packing').children[1].style.display = '';
+                }
+                else {
+                    document.getElementById('packing').children[0].style.color = 'white';
+                    document.getElementById('packing').children[1].style.display = 'none';
+                    document.getElementById('packing').children[2].style.display = '';
+                }
+                if (getShiftUp(gamepads)) {
+                    document.getElementById('shift_up').children[0].style.color = 'orange';
+                    document.getElementById('shift_up').children[2].style.display = 'none';
+                    document.getElementById('shift_up').children[1].style.display = '';
+                }
+                else {
+                    document.getElementById('shift_up').children[0].style.color = 'white';
+                    document.getElementById('shift_up').children[1].style.display = 'none';
+                    document.getElementById('shift_up').children[2].style.display = '';
+                }
+                if (getShiftDown(gamepads)) {
+                    document.getElementById('shift_down').children[0].style.color = 'orange';
+                    document.getElementById('shift_down').children[2].style.display = 'none';
+                    document.getElementById('shift_down').children[1].style.display = '';
+                }
+                else {
+                    document.getElementById('shift_down').children[0].style.color = 'white';
+                    document.getElementById('shift_down').children[1].style.display = 'none';
+                    document.getElementById('shift_down').children[2].style.display = '';
+                }
+                if (getDiffLock(gamepads)) {
+                    document.getElementById('diff_lock').children[0].style.color = 'orange';
+                    document.getElementById('diff_lock').children[2].style.display = 'none';
+                    document.getElementById('diff_lock').children[1].style.display = '';
+                }
+                else {
+                    document.getElementById('diff_lock').children[0].style.color = 'white';
+                    document.getElementById('diff_lock').children[1].style.display = 'none';
+                    document.getElementById('diff_lock').children[2].style.display = '';
+                }
+                if (getTrackLiftAxle(gamepads)) {
+                    document.getElementById('track_lift_axle').children[0].style.color = 'orange';
+                    document.getElementById('track_lift_axle').children[2].style.display = 'none';
+                    document.getElementById('track_lift_axle').children[1].style.display = '';
+                }
+                else {
+                    document.getElementById('track_lift_axle').children[0].style.color = 'white';
+                    document.getElementById('track_lift_axle').children[1].style.display = 'none';
+                    document.getElementById('track_lift_axle').children[2].style.display = '';
+                }
+                if (getTrailerLiftAxle(gamepads)) {
+                    document.getElementById('trailer_lift_axle').children[0].style.color = 'orange';
+                    document.getElementById('trailer_lift_axle').children[2].style.display = 'none';
+                    document.getElementById('trailer_lift_axle').children[1].style.display = '';
+                }
+                else {
+                    document.getElementById('trailer_lift_axle').children[0].style.color = 'white';
+                    document.getElementById('trailer_lift_axle').children[1].style.display = 'none';
+                    document.getElementById('trailer_lift_axle').children[2].style.display = '';
+                }
+                if (getHinge(gamepads)) {
+                    document.getElementById('hinge').children[0].style.color = 'orange';
+                    document.getElementById('hinge').children[2].style.display = 'none';
+                    document.getElementById('hinge').children[1].style.display = '';
+                }
+                else {
+                    document.getElementById('hinge').children[0].style.color = 'white';
+                    document.getElementById('hinge').children[1].style.display = 'none';
+                    document.getElementById('hinge').children[2].style.display = '';
+                }
+                if (getShifter(gamepads)) {
+                    document.getElementById('shifter').children[0].style.color = 'orange';
+                    document.getElementById('shifter').children[2].style.display = 'none';
+                    document.getElementById('shifter').children[1].style.display = '';
+                }
+                else {
+                    document.getElementById('shifter').children[0].style.color = 'white';
+                    document.getElementById('shifter').children[1].style.display = 'none';
+                    document.getElementById('shifter').children[2].style.display = '';
+                }
+
+                
+
                 //计数
                 /*
                 if (valueAccelerator >= 0.0001 && !accelerator_pressed) {
@@ -452,11 +581,11 @@
                 else if (!(value_steering > 0.0001 || value_steering < -0.0001) && turn_pressed) {
                     turn_pressed = false;
                 }
-                */
                 //更新计数显示
                 document.getElementById('count_accelerator').innerText = count_accelerator;
                 document.getElementById('count_break').innerText = count_break;
                 document.getElementById('count_turn').innerText = count_turn;
+                */
 
                 //更新踏板显示
                 document.getElementById('steering_img').style.transformOrigin = "50% 50%";
@@ -473,81 +602,78 @@
         };
 
         args = getArgs(document.url);
+        count = new Object();
+        statu = new Object();
+        press = new Object();
+        // 建立获取数值函数
+        getSteering = getFuncByArgName('steering', 'a');
+        getClutch = getFuncByArgName('clutch', 'v');
+        getAccelerator = getFuncByArgName('accelerator', 'v');
+        getBreak = getFuncByArgName('break', 'v');
 
-        getSteering = getFuncByArg('steering', 'a');
-        getClutch = getFuncByArg('clutch', 'v');
-        getAccelerator = getFuncByArg('accelerator', 'v');
-        getBreak = getFuncByArg('break', 'v');
+        getPacking = getBoolFuncByArgName('paking', 'p', args.display_paking);
+        getShiftUp = getBoolFuncByArgName('shift_up', 'p', args.display_shift);
+        getShiftDown = getBoolFuncByArgName('shift_down', 'p', args.display_shift);
+        getDiffLock = getBoolFuncByArgName('diff_lock', 'p', args.display_diff_lock);
+        getTrackLiftAxle = getBoolFuncByArgName('track_lift_axle', 'p', args.display_track_lift_axle);
+        getTrailerLiftAxle = getBoolFuncByArgName('trailer_lift_axle', 'p', args.display_trailer_lift_axle);
+        getHinge = getBoolFuncByArgName('hinge', 'p', args.display_hinge);
+        getShifter = getBoolFuncByArgName('shifter', 'p', args.display_hinge);
 
+        // 定义显示
         if (args.opacity !== undefined) {
             document.body.style.opacity = args.opacity;
         }
-        if (args.style == '0') {
-            //TODO
-            windowsHeight = 500;
-            windowsWidth = 0;
+        windowsHeight = 300;
+        windowsWidth = 0;
+        document.getElementById('piclist').style = '';
+        if (args.display_steering != '0') {
+            windowsWidth += 480;
+            document.getElementById('text_steering').style = '';
+            document.getElementById('pedal_steering').style = '';
         }
-        else {
-            windowsHeight = 300;
-            windowsWidth = 0;
-            document.getElementById('piclist').style = '';
-            if (args.display_steering != '0') {
-                windowsWidth += 480;
-                document.getElementById('text_steering').style = '';
-                document.getElementById('pedal_steering').style = '';
+        if (args.display_clutch != undefined && args.display_clutch != '0') {
+            windowsWidth += 450;
+            document.getElementById('text_clutch').style = '';
+            document.getElementById('pedal_clutch').style = '';
+        }
+        if (args.display_break != '0') {
+            windowsWidth += 450;
+            document.getElementById('text_break').style = '';
+            document.getElementById('pedal_break').style = '';
+        }
+        if (args.display_accelerator != '0') {
+            windowsWidth += 450;
+            document.getElementById('text_accelerator').style = '';
+            document.getElementById('pedal_accelerator').style = '';
+        }
+        if (args.indicator != '0') {
+            windowsWidth += 220;
+            document.getElementById('indicator').style = '';
+            if (args.display_packing != '0') {
+                document.getElementById('packing').style = '';
             }
-            if (args.display_clutch != undefined && args.display_clutch != '0') {
-                windowsWidth += 480;
-                document.getElementById('text_clutch').style = '';
-                document.getElementById('pedal_clutch').style = '';
+            if (args.display_shift != '0') {
+                document.getElementById('shift_up').style = '';
+                document.getElementById('shift_down').style = '';
             }
-            if (args.display_break != '0') {
-                windowsWidth += 480;
-                document.getElementById('text_break').style = '';
-                document.getElementById('pedal_break').style = '';
+            if (args.display_diff_lock != undefined && args.display_diff_lock != '0') {
+                document.getElementById('diff_lock').style = '';
             }
-            if (args.display_accelerator != '0') {
-                windowsWidth += 480;
-                document.getElementById('text_accelerator').style = '';
-                document.getElementById('pedal_accelerator').style = '';
+            if (args.display_track_lift_axle != undefined && args.display_track_lift_axle != '0') {
+                document.getElementById('track_lift_axle').style = '';
             }
-            if (args.indicator != '0') {
-                windowsWidth += 200;
-                document.getElementById('text_indicator').style = '';
-                document.getElementById('indicator').style = '';
-                if (args.display_packing != '0') {
-                    document.getElementById('packing_text').style = '';
-                    document.getElementById('packing').style = '';
-                }
-                if (args.display_shift != '0') {
-                    document.getElementById('shift_up_text').style = '';
-                    document.getElementById('shift_up').style = '';
-                    document.getElementById('shift_down_text').style = '';
-                    document.getElementById('shift_down').style = '';
-                }
-                if (args.display_diff_lock != undefined && args.display_diff_lock != '0') {
-                    document.getElementById('diff_lock_text').style = '';
-                    document.getElementById('diff_lock').style = '';
-                }
-                if (args.display_track_lift_axle != undefined && args.display_track_lift_axle != '0') {
-                    document.getElementById('track_lift_axle_text').style = '';
-                    document.getElementById('track_lift_axle').style = '';
-                }
-                if (args.display_trailer_lift_axle != undefined && args.display_trailer_lift_axle != '0') {
-                    document.getElementById('trailer_lift_axle_text').style = '';
-                    document.getElementById('trailer_lift_axle').style = '';
-                }
-                if (args.display_hinge != undefined && args.display_hinge != '0') {
-                    document.getElementById('hinge_text').style = '';
-                    document.getElementById('hinge').style = '';
-                    document.getElementById('mini_shifter_text').style = '';
-                    document.getElementById('mini_shifter').style = '';
-                }
+            if (args.display_trailer_lift_axle != undefined && args.display_trailer_lift_axle != '0') {
+                document.getElementById('trailer_lift_axle').style = '';
             }
-            if (args.display_couter != undefined && args.display_couter != '0') {
-                windowsWidth += 220;
-                document.getElementById('couter').style = '';
+            if (args.display_hinge != undefined && args.display_hinge != '0') {
+                document.getElementById('hinge').style = '';
+                document.getElementById('shifter').style = '';
             }
+        }
+        if (args.display_couter != undefined && args.display_couter != '0') {
+            windowsWidth += 220;
+            document.getElementById('couter').style = '';
         }
 
         document.body.style.height = windowsHeight + 'px';

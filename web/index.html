@@ -378,7 +378,7 @@
             <h3 id="no-iframe" style="display: none;">本地文件模式不支持预览</h3>
 
             <iframe id="demo-iframe" src="pvg-low.html" height="300px" width="1640px"
-                style="transform: scale(0.5);"></iframe>
+                style="transform: scale(0.5);"  scrolling="no"></iframe>
             <div class="page-up page-updown" onclick="scrollToElement('home')">
                 <img src="imgs/down.svg">
             </div>
@@ -415,17 +415,17 @@
                         'name': '手柄',
                         'children': {
                             'default': { 'name': '默认', 'url': 'pvg-low.html' },
-                            'full': { 'name': '完整参数', 'url': 'pvg-low.html?opacity=1&fps=60&display_steering=1&max_angle=90&display_clutch=0&display_accelerator=1&display_break=1&indicator=1&display_paking=1&display_shift=1&display_diff_lock=0&display_track_lift_axle=0&display_trailer_lift_axle=0&display_hinge=0&steering=a0&clutch=v4&accelerator=v7&break=v6&shiftup=p0&shiftdown=p1' },
-                            'auto_1': { 'name': '自动(A手刹)', 'url': 'pvg-low.html?indicator=0&paking=p1' },
+                            'full': { 'name': '完整参数', 'url': 'pvg-low.html?opacity=1&fps=60&display_steering=1&max_angle=90&display_clutch=0&display_accelerator=1&display_break=1&indicator=1&display_paking=1&display_shift=1&display_diff_lock=0&display_track_lift_axle=0&display_trailer_lift_axle=0&display_hinge=0&steering=a0&clutch=v4&accelerator=v7&break=v6&shiftup=p0&shiftdown=p1&diff_lock=p0+p1&track_lift_axle=p2+p3&trailer_lift_axle=p1+p2&hinge=p3&shifter=p4' },
+                            'auto_1': { 'name': '自动(A手刹)', 'url': 'pvg-low.html?indicator=0&paking=p0' },
                             'auto_2': { 'name': '自动(RB手刹)', 'url': 'pvg-low.html?indicator=0&paking=p5' },
-                            'manual_1': { 'name': '手动(B升A降RB手刹)', 'url': 'pvg-low.html?shiftup=p0&shiftdown=p1&paking=p5' },
-                            'manual_2': { 'name': '手动(Y升B降A手刹)', 'url': 'pvg-low.html?shiftup=p2&shiftdown=p0&paking=p1' },
-                            'clutch_1': { 'name': '手离(LB离合B升A降RB手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shiftup=p0&shiftdown=p1&paking=p5' },
-                            'clutch_2': { 'name': '手离(LB离合Y升B降RB手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shiftup=p2&shiftdown=p0&paking=p5' },
-                            'clutch_3': { 'name': '手离(LB离合Y升B降A手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shiftup=p2&shiftdown=p0&paking=p1' },
-                            'clutch_4': { 'name': '手离(B离合Y升A降RB手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shiftup=p0&shiftdown=p1&paking=p5' },
-                            'spin_tires': { 'name': '旋转轮胎系列', 'url': 'pvg-low.html?display_shift=0&display_hinge=1' },
-                            'truck_auto': { 'name': '美卡&欧卡2自动', 'url': 'pvg-low.html?display_paking=2&display_shift=0&display_diff_lock=1&display_track_lift_axle=1' },
+                            'manual_1': { 'name': '手动(B升A降RB手刹)', 'url': 'pvg-low.html?shiftup=p1&shiftdown=p0&paking=p5' },
+                            'manual_2': { 'name': '手动(Y升B降A手刹)', 'url': 'pvg-low.html?shiftup=p2&shiftdown=p1&paking=p0' },
+                            'clutch_1': { 'name': '手离(LB离合B升A降RB手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shiftup=p1&shiftdown=p0&paking=p5' },
+                            'clutch_2': { 'name': '手离(LB离合Y升B降RB手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shiftup=p3&shiftdown=p1&paking=p5' },
+                            'clutch_3': { 'name': '手离(LB离合Y升B降A手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shiftup=p3&shiftdown=p1&paking=p0' },
+                            'clutch_4': { 'name': '手离(B离合Y升A降RB手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v1&shiftup=p3&shiftdown=p0&paking=p5' },
+                            'spin_tires': { 'name': '旋转轮胎系列', 'url': 'pvg-low.html?display_paking=2&display_shift=0&display_hinge=1' },
+                            'truck_auto': { 'name': '美卡&欧卡2自动', 'url': 'pvg-low.html?display_paking=2&display_shift=0&display_diff_lock=2&display_track_lift_axle=2' },
                             'truck_manual': { 'name': '美卡&欧卡2手动(B升A降)', 'url': 'pvg-low.html?display_paking=2&display_shift=1' },
                         }
                     }
