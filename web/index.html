@@ -168,6 +168,30 @@
             margin: 30px;
         }
 
+        a:any-link {
+            text-decoration-style: dashed;
+        }
+
+        a:hover {
+            text-decoration-style: double;
+        }
+
+        #demo a:any-link {
+            color: #61BFAD;
+        }
+
+        #demo a:visited {
+            color: #61BFAD;
+        }
+
+        #document a:any-link {
+            color: #F9F7E8;
+        }
+
+        #document a:visited {
+            color: #F9F7E8;
+        }
+
         .button-group {
             justify-content: center;
             align-items: center;
@@ -407,7 +431,7 @@
 
         <section class="page content-page" id="demo">
             <h4>快速开始</h4>
-            <h5>——可自定义按键和显示内容，参数说明和更多细节请见<a href="https://github.com/BoyInTheSun/pvg">项目地址</a>——</h5>
+            <h5>——可自定义按键和显示内容，参数说明和更多细节请见<a href="https://github.com/BoyInTheSun/pvg" target="_blank">项目地址</a>——</h5>
             <div class="demo-bar">
                 <select class="select" id="select-type"></select>
                 <select class="select" id="select-device"></select>
@@ -449,17 +473,12 @@
 
     </div>
     <script>
-        function scrollToElement(ElementID) {
-            document.getElementById(ElementID).scrollIntoView({
-                behavior: "smooth",
-            });
-        };
         const demo_urls = {
             'low': {
                 'name': '矮版',
                 'children': {
                     'xbox': {
-                        'name': '手柄',
+                        'name': '手柄(Xbox)',
                         'children': {
                             'default': { 'name': '默认', 'url': 'pvg-low.html' },
                             'full': { 'name': '完整参数', 'url': 'pvg-low.html?opacity=1&fps=60&display_steering=1&max_angle=90&display_clutch=0&display_accelerator=1&display_break=1&indicator=1&display_paking=1&display_shift=1&display_diff_lock=0&display_track_lift_axle=0&display_trailer_lift_axle=0&display_hinge=0&steering=a0&clutch=v4&accelerator=v7&break=v6&shiftup=p0&shiftdown=p1&diff_lock=p0+p1&track_lift_axle=p2+p3&trailer_lift_axle=p1+p2&hinge=p3&shifter=p4' },
@@ -475,13 +494,39 @@
                             'truck_auto': { 'name': '美卡&欧卡2自动', 'url': 'pvg-low.html?display_paking=2&display_shift=0&display_diff_lock=2&display_track_lift_axle=2' },
                             'truck_manual': { 'name': '美卡&欧卡2手动(B升A降)', 'url': 'pvg-low.html?display_paking=2&display_shift=1' },
                         }
+                    },
+                    'custom': {
+                        'name': '自定义',
+                        'children': {
+                            'custom': { 'name': '自定义', 'url': 'pvg-low.html?' }
+                        }
+                    }
+                }
+            },
+            'high': {
+                'name': '高版',
+                'children': {
+                    'todo': {
+                        'name': '敬请期待',
+                        'children': {
+                            'custom': { 'name': '自定义', 'url': 'pvg-high.html?' }
+                        }
                     }
                 }
             }
         }
+        iframe = document.getElementById('demo-iframe');
+        selectType = document.getElementById('select-type');
+        selectDevice = document.getElementById('select-device');
+        selectConf = document.getElementById('select-conf');
+
+        function scrollToElement(ElementID) {
+            document.getElementById(ElementID).scrollIntoView({
+                behavior: "smooth",
+            });
+        };
 
         function transform_iframe() {
-            iframe = document.getElementById('demo-iframe');
             iframe.height = iframe.contentWindow.document.body.clientHeight + 'px';
             iframe.width = iframe.contentWindow.document.body.clientWidth + 'px';
             iframe.style = 'transform-origin: top; transform: scale(' + (window.innerWidth - 300) / iframe.contentWindow.document.body.clientWidth + ');';
@@ -493,61 +538,91 @@
                 new URL(window.location.href)
             ).href;
         }
+
         function updateIframe() {
-            iframe = document.getElementById('demo-iframe');
-            iframe.src = document.getElementById('demo-url').value;
+            var url = document.getElementById('demo-url').value;
+            iframe.src = url;
+        }
+
+        function updateType(notUpdateUrl) {
+            var optionsType = '';
+            for (type of Object.keys(demo_urls)) {
+                optionsType += '<option value="' + type + '">' + demo_urls[type].name + '</option>';
+            }
+            selectType.innerHTML = optionsType;
+            updateDevice(notUpdateUrl);
+        }
+
+        function updateDevice(notUpdateUrl) {
+            var optionsDevice = '';
+            var devices = demo_urls[selectType.value].children;
+            for (device of Object.keys(devices)) {
+                optionsDevice += '<option value="' + device + '">' + devices[device].name + '</option>';
+            }
+            selectDevice.innerHTML = optionsDevice;
+            updateConf(notUpdateUrl);
+        }
+
+        function updateConf(notUpdateUrl) {
+            var optionsConf = '';
+            var confs = demo_urls[selectType.value].children[selectDevice.value].children;
+            for (conf of Object.keys(confs)) {
+                optionsConf += '<option value="' + conf + '">' + confs[conf].name + '</option>';
+            }
+            selectConf.innerHTML = optionsConf;
+            if (!notUpdateUrl) updateUrl();
+        }
+
+        function updateUrl() {
+            var url = demo_urls[selectType.value].children[selectDevice.value].children[selectConf.value].url;
+            document.getElementById('demo-url').value = url;
+            updateIframe();
+        }
+
+        function updateSelect() {
+            updateIframe();
+            var url = document.getElementById('demo-url').value;
+            if (url.startsWith('pvg-low.html')) {
+                selectType.value = 'low';
+                updateDevice(true);
+                selectDevice.value = 'custom';
+                updateConf(true);
+                selectConf.value = 'custom';
+            }
+            else if (url.startsWith('pvg-high.html')) {
+                selectType.value = 'low';
+                updateDevice(true);
+                selectDevice.value = 'custom';
+                updateConf(true);
+                selectConf.value = 'custom';
+            }
+            else {
+                selectType.value = '';
+                selectDevice.value = '';
+                selectDevice.innerHTML = '';
+                selectConf.value = '';
+                selectConf.innerHTML = '';
+            }
         }
 
         if (window.location.protocol == 'file:') {
-            iframe = document.getElementById('demo-iframe');
             iframe.style = 'display: none;';
-            noIframe = document.getElementById('no-iframe');
-            noIframe.style = '';
+            document.getElementById('no-iframe').style = '';
         }
         else {
             document.getElementById('demo-iframe').addEventListener('load', transform_iframe)
             window.onresize = transform_iframe;
-            document.getElementById('demo-url').addEventListener('input', updateIframe);
+            document.getElementById('demo-url').addEventListener('input', updateSelect);
         }
         if (window.location.protocol == 'http:') {
             document.styleSheets[0].addRule('#btn-copy:hover', 'cursor: not-allowed;');
         }
 
-        selectType = document.getElementById('select-type');
-        selectDevice = document.getElementById('select-device');
-        selectConf = document.getElementById('select-conf');
-        optionsType = '';
-        for (type of Object.keys(demo_urls)) {
-            optionsType += '<option value="' + type + '">' + demo_urls[type].name + '</option>';
-        }
-        selectType.innerHTML = optionsType;
-        function updateDevice() {
-            optionsDevice = '';
-            devices = demo_urls[selectType.value].children;
-            for (device of Object.keys(devices)) {
-                optionsDevice += '<option value="' + device + '">' + devices[device].name + '</option>';
-            }
-            selectDevice.innerHTML = optionsDevice;
-        }
-        updateDevice();
-        selectType.addEventListener('change', updateDevice);
-        function updateConf() {
-            optionsConf = '';
-            confs = demo_urls[selectType.value].children[selectDevice.value].children;
-            for (conf of Object.keys(confs)) {
-                optionsConf += '<option value="' + conf + '">' + confs[conf].name + '</option>';
-            }
-            selectConf.innerHTML = optionsConf;
-        }
-        updateConf();
-        selectDevice.addEventListener('change', updateConf);
-        function updateUrl() {
-            url = demo_urls[selectType.value].children[selectDevice.value].children[selectConf.value].url;
-            document.getElementById('demo-url').value = url;
-            updateIframe();
-        }
-        selectConf.addEventListener('change', updateUrl);
-        updateUrl();
+        updateType();
+
+        selectType.addEventListener('change', function () { updateDevice(); });
+        selectDevice.addEventListener('change', function () { updateConf(); });
+        selectConf.addEventListener('change', function () { updateUrl(); });
 
 
 
