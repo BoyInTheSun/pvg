@@ -25,6 +25,7 @@
             height: 100vh;
             overflow-y: scroll;
             scroll-snap-type: y mandatory;
+            scrollbar-width: none;
         }
 
         .page-updown {
@@ -96,84 +97,130 @@
         }
 
         section#home {
-            background-color: #f4f3f3;
+            background-color: #FF8B8B;
         }
 
         section#document {
-            background-color: #f4f3f3;
+            background-color: #61BFAD;
         }
+
         @font-face {
             font-family: 'MyFont';
             src: url('static/Copperplate_Gothic_Bold.ttf');
-            }
-        h6 {
-            color: #060317;
+        }
+
+        .icon {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            user-select: none;
+            height: 30px;
+        }
+
+        .icon img {
+            vertical-align: middle;
+            height: 20px;
+            width: 20px;
+        }
+
+        .icon span {
+            color: #000000;
             font-size: 15px;
-            font-family:'MyFont';
+            font-family: 'MyFont';
             margin: 5px;
         }
 
         h1 {
-            background: linear-gradient(to right, #f4f3f3 50%, #060317 50%);
+            background: #F9F7E8;
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            font-size: 50px;
+            font-size: 60px;
             margin: 10px;
-            font-family:'MyFont';
+            font-family: 'MyFont';
         }
-        .gradient {
-            background: linear-gradient(to right, #060317 50%, #f4f3f3 50%);
-            color: transparent;
-        }     
 
+        .gradient {
+            background: linear-gradient(to right, #F9F7E8 50%, #FF8B8B 50%);
+            color: transparent;
+        }
 
         h2 {
-            color: #060317;
+            color: #F9F7E8;
             font-size: 35px;
-            margin: 20px;
+            margin: 30px;
         }
+
         h3 {
-            color: #060317;
+            color: #F9F7E8;
             font-size: 25px;
-            margin: 10px;
+        }
+
+        h4 {
+            color: #61BFAD;
+            font-size: 40px;
+            margin: 30px;
+        }
+
+        h5 {
+            color: #61BFAD;
+            font-size: 30px;
+            margin: 30px;
         }
 
         .button-group {
+            justify-content: center;
+            align-items: center;
             display: flex;
             user-select: none;
+            width: 780px;
+            height: 200px;
+        }
+
+        .circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin-left: 10px;
+            margin-right: 10px;
+            border: 10px solid #F9F7E8;
         }
 
         .pedal {
-            position: relative;
-            height: 200px;
-            width: 200px;
-            transition: transform 0.3s;
+            justify-content: center;
+            text-align: center;
         }
 
         .pedal img {
             position: relative;
-            height: 200px;
-            width: 200px;
+            height: 130px;
+            width: 130px;
             top: 0px;
             z-index: 1;
+        }
+
+        .desc {
+            text-align: center;
+            margin-top: -15px;
+            color: #F9F7E8;
+            size: 10px;
+        }
+
+        .pedal {
+            transition: transform 0.3s;
         }
 
         .pedal p {
             position: absolute;
             user-select: none;
-            color: #ae3b05;
+            color: #F9F7E8;
+            padding: 15px;
             text-align: center;
             z-index: 2;
-            text-shadow:
-                -1px -1px 0 #feb414,
-                1px -1px 0 #feb414,
-                -1px 1px 0 #feb414,
-                1px 1px 0 #feb414;
         }
 
         .pedal0 p {
-            font-size: 30px;
+            font-size: 25px;
             top: 75px;
             width: 200px;
         }
@@ -214,27 +261,26 @@
         }
 
         section#demo {
-            background-color: #f2ca9c;
+            background-color: #F9F7E8;
         }
 
         .demo-bar {
-            font-size: 22px;
-            height: 26px;
+            font-size: 30px;
+            height: 35px;
             line-height: 26px;
-            width: 100%;
+            width: calc(100% - 300px);
             display: flex;
             justify-content: center;
             margin: 10px 0;
         }
 
         .select {
-            background-color: #f4dfc6;
+            background-color: #61BFAD;
             margin: 0 2px;
             border-radius: 3px;
             display: flex;
             line-height: 26px;
             font-size: 18px;
-            border: #000000 1px solid;
         }
 
         .select:hover {
@@ -255,15 +301,15 @@
         }
 
         #select-type {
-            width: 60px;
+            width: 15%;
         }
 
         #select-device {
-            width: 100px;
+            width: 25%;
         }
 
         #select-conf {
-            width: 240px;
+            width: 60%;
         }
 
         .select-active {
@@ -274,21 +320,20 @@
         .demo-bar input {
             box-sizing: border-box;
             vertical-align: top;
-            height: 26px;
+            height: 35px;
             line-height: 26px;
             font-size: 18px;
             border: 1px #000000 solid;
-            background-color: #f4dfc6;
+            background-color: #61BFAD;
             outline: none;
             padding: 0;
-            padding-left: 10px;
             margin: 0;
-            margin-left: 5px;
+            margin-right: 5px;
             color: #000000;
             padding-block: 0px;
-            padding-inline: 0px;
+            padding-inline: 5px;
             border-radius: 3px;
-            width: calc(100% - 760px);
+            width: 100%;
         }
 
         .demo-bar input:focus-visible {
@@ -302,15 +347,15 @@
         .demo-bar .btn {
             user-select: none;
             border-radius: 3px;
-            width: 26px;
-            height: 26px;
+            width: 35px;
+            height: 35px;
             margin: 0 2px;
         }
 
         .demo-bar .btn img {
             margin: 3px 3px;
-            width: 20px;
-            height: 20px;
+            width: 30px;
+            height: 30px;
         }
 
         .demo-bar #btn-copy {
@@ -334,51 +379,53 @@
 <body>
     <div class="container">
         <section class="page" id="home">
-            <h6>BoyInTheSun</h6>
-            <div class="gradient">
-                <h1>Pedal Visualization of Gamepad</h1>
+            <div class="icon" onclick="window.open('https://github.com/BoyInTheSun/pvg')">
+                <img src="imgs/boyinthesun.png">
+                <span>BoyInTheSun</span>
             </div>
-            <h2>——游戏控制器踏板可视化——</h2>
-            <h3>——基于H5的赛车游戏直播插件，实时读取手柄等控制器的状态，方便观众了解主播操作。——</h3>
+            <h1>Pedal Visualization of Gamepad</h1>
+            <h2>/ 游 / 戏 / 控 / 制 / 器 / 踏 / 板 / 可 / 视 / 化 /</h2>
             <div class="button-group">
-                <div class="pedal pedal0" id="clutch" onclick="window.open('https://github.com/BoyInTheSun/pvg')">
+                <div class="pedal pedal0 circle" onclick="window.open('https://github.com/BoyInTheSun/pvg')">
                     <img src="imgs/pedal0.png">
-                    <p>项目地址</p>
+                    <div class="desc">项目地址</div>
                 </div>
-                <div class="pedal pedal0" id="clutch" onclick="scrollToElement('document')">
+                <div class="pedal pedal0 circle" onclick="scrollToElement('document')">
                     <img src="imgs/pedal0.png">
-                    <p>说明文档</p>
+                    <div class="desc">说明文档</div>
                 </div>
-                <div class="pedal pedal1" id="clutch" onclick="scrollToElement('demo')">
+                <div class="pedal pedal1 circle" onclick="scrollToElement('demo')">
                     <img src="imgs/pedal1.png">
-                    <p>快速开始</p>
+                    <div class="desc">快速开始</div>
                 </div>
             </div>
+            <h3>——基于H5的赛车游戏直播插件，实时读取手柄等控制器的状态，方便观众了解主播操作。——</h3>
             <div class="page-down page-updown" onclick="scrollToElement('demo')">
                 <img src="imgs/down.svg">
             </div>
         </section>
 
         <section class="page content-page" id="demo">
-            <h2>快速开始</h2>
-            <h3>可自定义按键和显示内容，参数说明和更多细节请见<a href="https://github.com/BoyInTheSun/pvg">项目地址</a></h3>
+            <h4>快速开始</h4>
+            <h5>——可自定义按键和显示内容，参数说明和更多细节请见<a href="https://github.com/BoyInTheSun/pvg">项目地址</a>——</h5>
             <div class="demo-bar">
                 <select class="select" id="select-type"></select>
                 <select class="select" id="select-device"></select>
                 <select class="select" id="select-conf"></select>
-
+            </div>
+            <div class="demo-bar">
+                <input id="demo-url" type="url" value="pvg-low.html">
                 <div class="btn" id="btn-copy" onclick="navigator.clipboard.writeText(getDemoUrl());">
                     <img src="imgs/copy.svg">
                 </div>
                 <div class="btn" id="btn-open" onclick="window.open(getDemoUrl());">
                     <img src="imgs/open.svg">
                 </div>
-                <input id="demo-url" type="url" value="pvg-low.html">
             </div>
             <h3 id="no-iframe" style="display: none;">本地文件模式不支持预览</h3>
 
-            <iframe id="demo-iframe" src="pvg-low.html" height="300px" width="1640px"
-                style="transform: scale(0.5);"  scrolling="no"></iframe>
+            <iframe id="demo-iframe" src="pvg-low.html" height="300px" width="1640px" style="transform: scale(0.5);"
+                scrolling="no"></iframe>
             <div class="page-up page-updown" onclick="scrollToElement('home')">
                 <img src="imgs/down.svg">
             </div>
