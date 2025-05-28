@@ -275,7 +275,7 @@
             if (!argExpFull) argExpFull = getDefaultArg(argName);
             if (!argExpFull) return function (gamepads) { 0 };
             if (argExpFull.indexOf('+') != -1) {
-                argExps = argExpFull.split('+');
+                var argExps = argExpFull.split('+');
                 var funcs = new Array();
                 for (let argExp of argExps) {
                     funcs.push(getFuncByArgExp(argExp, 'p'));
@@ -296,16 +296,16 @@
             /*
             target可选：p压变量、a轴变量和v值变量
             */
-            const reg = /^([0-3]?)([apv])([0-9]+)([apv]?[pm]?r?)(-?[01]\.[0-9]*)?$/;
+            const reg = /^([1-4]?)([apv])([0-9]+)([apv]?[pm]?r?)(-?[01]\.[0-9]*)?$/;
             var result = argExp.match(reg);
-            //console.log('getFuncByArgExp', argExp, target, result);
 
             if (!result) {
                 console.log('[Error] ' + argExp + ' 格式非法。');
                 return function (gamepad) { return 0; };
             }
-            var gamepadIndex = result[1] ? parseInt(result[1]) : 0;
+            var gamepadIndex = result[1] ? parseInt(result[1]) - 1 : 0;
             var variableIndex = parseInt(result[3]);
+            console.log('getFuncByArgExp', argExp, target, result, gamepadIndex, variableIndex);
 
             var splitValue = null;
             if (result[5]) {
@@ -444,7 +444,7 @@
                 var gamepads = navigator.getGamepads();
                 if (gamepads[0] == null) return;
 
-                gamepads = [gamepads[1], null, null, null]; /* for test */
+                //gamepads = [gamepads[1], null, null, null]; /* for test */
 
                 document.getElementById('hello').style.display = 'none';
                 var steeringValue = getSteering(gamepads);
