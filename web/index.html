@@ -47,7 +47,8 @@
         }
 
         .page-down {
-            bottom: 20px;
+            bottom: 0;
+            padding-bottom: 20px;
         }
 
         .page-down img {
@@ -55,7 +56,8 @@
         }
 
         .page-up {
-            top: 20px;
+            top: 0;
+            padding-top: 20px;
         }
 
         .page-up img {
@@ -304,6 +306,7 @@
             border-radius: 3px;
             display: flex;
             line-height: 26px;
+            height: 35px;
             font-size: 18px;
         }
 
@@ -447,9 +450,9 @@
                 </div>
             </div>
             <h3 id="no-iframe" style="display: none;">本地文件模式不支持预览</h3>
-
-            <iframe id="demo-iframe" src="pvg-low.html" height="300px" width="1640px" style="transform: scale(0.5);"
-                scrolling="no"></iframe>
+            <div>
+                <iframe id="demo-iframe" scrolling="no"></iframe>
+            </div>
             <div class="page-up page-updown" onclick="scrollToElement('home')">
                 <img src="imgs/down.svg">
             </div>
@@ -507,7 +510,7 @@
                 'name': '高版',
                 'children': {
                     'todo': {
-                        'name': '敬请期待',
+                        'name': '自定义',
                         'children': {
                             'custom': { 'name': '自定义', 'url': 'pvg-high.html?' }
                         }
@@ -529,6 +532,8 @@
         function transform_iframe() {
             iframe.height = iframe.contentWindow.document.body.clientHeight + 'px';
             iframe.width = iframe.contentWindow.document.body.clientWidth + 'px';
+            //iframe.style.height = iframe.contentWindow.document.body.clientHeight;
+            //iframe.style.width = iframe.contentWindow.document.body.clientWidth;
             iframe.style = 'transform-origin: top; transform: scale(' + (window.innerWidth - 300) / iframe.contentWindow.document.body.clientWidth + ');';
         }
 
