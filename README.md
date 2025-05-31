@@ -18,8 +18,6 @@ Pedal Visualization of Gamepad.
 
 使用[演示网址](https://pvg.boyinthesun.cn/)或将本项目克隆到本地。
 
-布局分为~~高版 `pvg-high.html`~~ 和矮版 `pvg-low.html`。
-
 关于如何在 OBS 中使用可参见[这篇文章](https://boyinthesun.cn/posts/a5fe58606b97.html)。
 
 ## 参数说明
@@ -32,6 +30,7 @@ Pedal Visualization of Gamepad.
 
 |参数名|说明|可选参数值|默认参数值|备注|
 |-|-|-|-|-|
+|style|风格|`low`矮版，`high`高版|`low`||
 |opacity|不透明度|`0.0` ~ `1.0`|`1.0`|如果使用 OBS 等串流软件，不建议在此处设置|
 |fps|刷新帧率|`1` ~ `1000`|`60`|不建议高于 `120`，否则会导致高CPU占用|
 |display_steering|显示方向盘|`0` 不显示，`1` 显示|`1`||
@@ -39,8 +38,8 @@ Pedal Visualization of Gamepad.
 |display_clutch|显示离合器|`0` 不显示，`1` 显示|`0`||
 |display_accelerator|显示油门|`0` 不显示，`1` 显示|`1`||
 |display_break|显示刹车|`0` 不显示，`1` 显示|`1`||
-|~~display_shifter~~|档位布局|`0` 不显示，其他见[下表](#档位布局-display_shifter)|`0`|仅当 `pvg-high` 时有效|
-|indicator|显示指示灯|`0` 不显示，`1` 显示|`1`|当 `pvg-low` 时最多3个，当 `pvg-high` 时最多4个|
+|~~display_shifter~~|档位布局|`0` 不显示，其他见[下表](#档位布局-display_shifter)|`0`|仅当 style=`high` 时有效|
+|indicator|显示指示灯|`0` 不显示，`1` 显示|`1`|当 style=`low` 时最多3个，当 style=`high` 时最多4个|
 |display_paking|显示手刹|`0` 不显示，`1` 按下，`2` 点击切换|`1`||
 |display_shift|显示加减档|`0` 不显示，`1` 按下|`1`|包含加档和减档两个|
 |display_diff_lock|显示差速器锁（欧卡2&美卡专用）|`0` 不显示，`1` 按下，`2` 点击切换|`0`||
@@ -104,7 +103,7 @@ Pedal Visualization of Gamepad.
 
 **特别地，`压变量`可以使用 `+` 连接，意为逻辑与。**
 
-若提供的变量范围和要求的不一致，则会使用**加粗**选项进行强制转换。
+若未提供附加选项，则会使用**加粗**项进行转换。
 
 #### 对于压变量的可选附加选项
 
@@ -154,9 +153,9 @@ Pedal Visualization of Gamepad.
 
 + [ ] 完善档位显示功能
 + [ ] 替换所有图片为SVG位图
-+ [ ] 英文支持
++ [ ] 多语言支持
 + [ ] 测试方向盘、踏板、排挡等硬件
-+ [ ] 简明网页辅助配置参数
++ [x] 简明网页辅助配置参数
 + [ ] 非线性支持
 + [ ] 自定义规范化区间
 + [ ] 对于触觉硬件的支持
@@ -188,3 +187,7 @@ Pedal Visualization of Gamepad.
 |button[14]|⇦左方向键||
 |button[15]|⇨右方向键||
 |button[16]|home键||
+
+## 致谢
+
+感谢@EchoGitH 为演示页前端设计做出的贡献。

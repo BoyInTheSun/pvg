@@ -94,7 +94,7 @@
             scroll-snap-align: start;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-evenly;
             align-items: center;
         }
 
@@ -117,6 +117,9 @@
             display: flex;
             user-select: none;
             height: 30px;
+        }
+        .icon :hover{
+            cursor: pointer;
         }
 
         .icon img {
@@ -150,7 +153,7 @@
         h2 {
             color: #F9F7E8;
             font-size: 35px;
-            margin: 30px;
+            margin: 5px;
         }
 
         h3 {
@@ -161,13 +164,13 @@
         h4 {
             color: #61BFAD;
             font-size: 40px;
-            margin: 30px;
+            margin: 5px;
         }
 
         h5 {
             color: #61BFAD;
             font-size: 30px;
-            margin: 30px;
+            margin: 3px;
         }
 
         a:any-link {
@@ -294,7 +297,6 @@
             font-size: 30px;
             height: 35px;
             line-height: 26px;
-            width: calc(100% - 300px);
             display: flex;
             justify-content: center;
             margin: 10px 0;
@@ -324,7 +326,7 @@
         }
 
         option:checked {
-            background-color: #ec8c24 !important;
+            background-color: #269c86 !important;
         }
 
         #select-type {
@@ -400,6 +402,11 @@
         .demo-bar .btn:active {
             cursor: copy;
         }
+
+        .block {
+            width: calc(100% - 300px);
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -435,23 +442,25 @@
         <section class="page content-page" id="demo">
             <h4>快速开始</h4>
             <h5>——可自定义按键和显示内容，参数说明和更多细节请见<a href="https://github.com/BoyInTheSun/pvg" target="_blank">项目地址</a>——</h5>
-            <div class="demo-bar">
-                <select class="select" id="select-type"></select>
-                <select class="select" id="select-device"></select>
-                <select class="select" id="select-conf"></select>
-            </div>
-            <div class="demo-bar">
-                <input id="demo-url" type="url" value="pvg-low.html">
-                <div class="btn" id="btn-copy" onclick="navigator.clipboard.writeText(getDemoUrl());">
-                    <img src="imgs/copy.svg">
+            <div class="block">
+                <div class="demo-bar">
+                    <select class="select" id="select-type"></select>
+                    <select class="select" id="select-device"></select>
+                    <select class="select" id="select-conf"></select>
                 </div>
-                <div class="btn" id="btn-open" onclick="window.open(getDemoUrl());">
-                    <img src="imgs/open.svg">
+                <div class="demo-bar">
+                    <input id="demo-url" type="url" value="pvg.html">
+                    <div class="btn" id="btn-copy" onclick="navigator.clipboard.writeText(getDemoUrl());">
+                        <img src="imgs/copy.svg">
+                    </div>
+                    <div class="btn" id="btn-open" onclick="window.open(getDemoUrl());">
+                        <img src="imgs/open.svg">
+                    </div>
                 </div>
-            </div>
-            <h3 id="no-iframe" style="display: none;">本地文件模式不支持预览</h3>
-            <div>
-                <iframe id="demo-iframe" scrolling="no"></iframe>
+                <h3 id="no-iframe" style="display: none;">本地文件模式不支持预览</h3>
+                <div id="div-iframe">
+                    <iframe id="demo-iframe" scrolling="no"></iframe>
+                </div>
             </div>
             <div class="page-up page-updown" onclick="scrollToElement('home')">
                 <img src="imgs/down.svg">
@@ -463,12 +472,14 @@
 
         <section class="page content-page" id="document">
             <h2>说明文档</h2>
-            <h3>你可以跟着<a href="https://boyinthesun.cn/posts/a5fe58606b97.html" target="_blank">这篇文章</a>逐步操作</h3>
-            <h3>项目仍在开发中，敬请关注</h3>
-            <h3>任何问题可邮件至<a
-                    href="mailto:a@boyinthesun.cn?subject=关于PVG的功能建议或bug反馈&body=我在发送此邮件前，已详细阅读了项目文档。">a@boyinthesun.cn</a>
-                或于<a href="" target="_blank">评论区</a>讨论
-            </h3>
+            <div class="block">
+                <h3>你可以跟着<a href="https://boyinthesun.cn/posts/a5fe58606b97.html" target="_blank">这篇文章</a>逐步操作</h3>
+                <h3>项目仍在开发中，敬请关注</h3>
+                <h3>任何问题可<a href="https://github.com/BoyInTheSun/pvg" target="_blank">提issue</a>、邮件至<a
+                        href="mailto:a@boyinthesun.cn?subject=关于PVG的功能建议或bug反馈&body=我在发送此邮件前，已详细阅读了项目文档。">a@boyinthesun.cn</a>
+                    或于<a href="" target="_blank">评论区</a>讨论
+                </h3>
+            </div>
             <div class="page-up page-updown" onclick="scrollToElement('demo')">
                 <img src="imgs/down.svg">
             </div>
@@ -483,25 +494,25 @@
                     'xbox': {
                         'name': '手柄(Xbox)',
                         'children': {
-                            'default': { 'name': '默认', 'url': 'pvg-low.html' },
-                            'full': { 'name': '完整参数', 'url': 'pvg-low.html?opacity=1&fps=60&display_steering=1&max_angle=90&display_clutch=0&display_accelerator=1&display_break=1&indicator=1&display_paking=1&display_shift=1&display_diff_lock=0&display_track_lift_axle=0&display_trailer_lift_axle=0&display_hinge=0&steering=a0&clutch=v4&accelerator=v7&break=v6&paking=p5&shift_up=p1&shift_down=p0&diff_lock=p0+p1&track_lift_axle=p2+p3&trailer_lift_axle=p1+p2&hinge=p3&shifter=p4' },
-                            'auto_1': { 'name': '自动(A手刹)', 'url': 'pvg-low.html?indicator=0&paking=p0' },
-                            'auto_2': { 'name': '自动(RB手刹)', 'url': 'pvg-low.html?indicator=0&paking=p5' },
-                            'manual_1': { 'name': '手动(B升A降RB手刹)', 'url': 'pvg-low.html?shift_up=p1&shift_down=p0&paking=p5' },
-                            'manual_2': { 'name': '手动(Y升B降A手刹)', 'url': 'pvg-low.html?shift_up=p2&shift_down=p1&paking=p0' },
-                            'clutch_1': { 'name': '手离(LB离合B升A降RB手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shift_up=p1&shift_down=p0&paking=p5' },
-                            'clutch_2': { 'name': '手离(LB离合Y升B降RB手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shift_up=p3&shift_down=p1&paking=p5' },
-                            'clutch_3': { 'name': '手离(LB离合Y升B降A手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v4&shift_up=p3&shift_down=p1&paking=p0' },
-                            'clutch_4': { 'name': '手离(B离合Y升A降RB手刹)', 'url': 'pvg-low.html?display_clutch=1&clutch=v1&shift_up=p3&shift_down=p0&paking=p5' },
-                            'spin_tires': { 'name': '旋转轮胎系列', 'url': 'pvg-low.html?display_paking=2&display_shift=0&display_hinge=1' },
-                            'truck_auto': { 'name': '美卡&欧卡2自动', 'url': 'pvg-low.html?display_paking=2&display_shift=0&display_diff_lock=2&display_track_lift_axle=2' },
-                            'truck_manual': { 'name': '美卡&欧卡2手动(B升A降)', 'url': 'pvg-low.html?display_paking=2&display_shift=1' },
+                            'default': { 'name': '默认', 'url': 'pvg.html' },
+                            'full': { 'name': '完整参数', 'url': 'pvg.html?style=low&opacity=1&fps=60&display_steering=1&max_angle=90&display_clutch=0&display_accelerator=1&display_break=1&indicator=1&display_paking=1&display_shift=1&display_diff_lock=0&display_track_lift_axle=0&display_trailer_lift_axle=0&display_hinge=0&steering=a0&clutch=v4&accelerator=v7&break=v6&paking=p5&shift_up=p1&shift_down=p0&diff_lock=p0+p1&track_lift_axle=p2+p3&trailer_lift_axle=p1+p2&hinge=p3&shifter=p4' },
+                            'auto_1': { 'name': '自动(A手刹)', 'url': 'pvg.html?indicator=0&paking=p0' },
+                            'auto_2': { 'name': '自动(RB手刹)', 'url': 'pvg.html?indicator=0&paking=p5' },
+                            'manual_1': { 'name': '手动(B升A降RB手刹)', 'url': 'pvg.html?shift_up=p1&shift_down=p0&paking=p5' },
+                            'manual_2': { 'name': '手动(Y升B降A手刹)', 'url': 'pvg.html?shift_up=p2&shift_down=p1&paking=p0' },
+                            'clutch_1': { 'name': '手离(LB离合B升A降RB手刹)', 'url': 'pvg.html?display_clutch=1&clutch=v4&shift_up=p1&shift_down=p0&paking=p5' },
+                            'clutch_2': { 'name': '手离(LB离合Y升B降RB手刹)', 'url': 'pvg.html?display_clutch=1&clutch=v4&shift_up=p3&shift_down=p1&paking=p5' },
+                            'clutch_3': { 'name': '手离(LB离合Y升B降A手刹)', 'url': 'pvg.html?display_clutch=1&clutch=v4&shift_up=p3&shift_down=p1&paking=p0' },
+                            'clutch_4': { 'name': '手离(B离合Y升A降RB手刹)', 'url': 'pvg.html?display_clutch=1&clutch=v1&shift_up=p3&shift_down=p0&paking=p5' },
+                            'spin_tires': { 'name': '旋转轮胎系列', 'url': 'pvg.html?display_paking=2&display_shift=0&display_hinge=1' },
+                            'truck_auto': { 'name': '美卡&欧卡2自动', 'url': 'pvg.html?display_paking=2&display_shift=0&display_diff_lock=2&display_track_lift_axle=2' },
+                            'truck_manual': { 'name': '美卡&欧卡2手动(B升A降)', 'url': 'pvg.html?display_paking=2&display_shift=1' },
                         }
                     },
                     'custom': {
                         'name': '自定义',
                         'children': {
-                            'custom': { 'name': '自定义', 'url': 'pvg-low.html?' }
+                            'custom': { 'name': '自定义', 'url': 'pvg.html?' }
                         }
                     }
                 }
@@ -510,9 +521,9 @@
                 'name': '高版',
                 'children': {
                     'todo': {
-                        'name': '自定义',
+                        'name': '敬请期待',
                         'children': {
-                            'custom': { 'name': '自定义', 'url': 'pvg-high.html?' }
+                            'custom': { 'name': '', 'url': '' }
                         }
                     }
                 }
@@ -532,9 +543,8 @@
         function transform_iframe() {
             iframe.height = iframe.contentWindow.document.body.clientHeight + 'px';
             iframe.width = iframe.contentWindow.document.body.clientWidth + 'px';
-            //iframe.style.height = iframe.contentWindow.document.body.clientHeight;
-            //iframe.style.width = iframe.contentWindow.document.body.clientWidth;
-            iframe.style = 'transform-origin: top; transform: scale(' + (window.innerWidth - 300) / iframe.contentWindow.document.body.clientWidth + ');';
+            iframe.style = 'transform-origin: left top; transform: scale(' + (window.innerWidth - 300) / iframe.contentWindow.document.body.clientWidth + ');';
+            document.getElementById('div-iframe').style.height = (window.innerWidth - 300) / 4 + 'px';
         }
 
         function getDemoUrl() {
@@ -587,7 +597,7 @@
         function updateSelect() {
             updateIframe();
             var url = document.getElementById('demo-url').value;
-            if (url.startsWith('pvg-low.html')) {
+            if (url.startsWith('pvg.html')) {
                 selectType.value = 'low';
                 updateDevice(true);
                 selectDevice.value = 'custom';
