@@ -190,4 +190,4 @@ Pedal Visualization of Gamepad.
 
 ## 致谢
 
-感谢@EchoGitH 为演示页前端设计做出的贡献。
+感谢[@EchoGitH](https://github.com/EchoGitH) 为演示页前端设计做出的贡献。
